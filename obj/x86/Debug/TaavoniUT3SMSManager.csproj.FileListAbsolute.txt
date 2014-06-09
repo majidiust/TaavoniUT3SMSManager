@@ -4,3 +4,9 @@ c:\users\majid\documents\visual studio 2010\Projects\TaavoniUT3SMSManager\Taavon
 c:\users\majid\documents\visual studio 2010\Projects\TaavoniUT3SMSManager\TaavoniUT3SMSManager\obj\x86\Debug\ResolveAssemblyReference.cache
 c:\users\majid\documents\visual studio 2010\Projects\TaavoniUT3SMSManager\TaavoniUT3SMSManager\obj\x86\Debug\TaavoniUT3SMSManager.exe
 c:\users\majid\documents\visual studio 2010\Projects\TaavoniUT3SMSManager\TaavoniUT3SMSManager\obj\x86\Debug\TaavoniUT3SMSManager.pdb
+D:\Projects\Taavoni\TaavoniUT3SMSManager\bin\Debug\TaavoniUT3SMSManager.exe.config
+D:\Projects\Taavoni\TaavoniUT3SMSManager\obj\x86\Debug\TaavoniUT3SMSManager.exe
+D:\Projects\Taavoni\TaavoniUT3SMSManager\obj\x86\Debug\TaavoniUT3SMSManager.pdb
+D:\Projects\Taavoni\TaavoniUT3SMSManager\bin\Debug\TaavoniUT3SMSManager.exe
+D:\Projects\Taavoni\TaavoniUT3SMSManager\bin\Debug\TaavoniUT3SMSManager.pdb
+D:\Projects\Taavoni\TaavoniUT3SMSManager\obj\x86\Debug\TaavoniUT3SMSManager.csprojResolveAssemblyReference.cache
