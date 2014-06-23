@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading;
+using System.Globalization;
 
 namespace TaavoniUT3SMSManager
 {
@@ -13,7 +14,7 @@ namespace TaavoniUT3SMSManager
         static String signature = "تعاونی شماره 3 کارکنان دانشگاه تهران";
         static void Main(string[] args)
         {
-
+         //   Console.WriteLine(CalculateUserPoint(Guid.Parse("876A8A4B-2894-4197-B3B1-BA127B951C63")));
             mRecievrThread = new Thread(() => { ThreadHandler(); });
             mRecievrThread.Start();
             mRecievrThread.Join();
@@ -125,9 +126,11 @@ result += "نشانی پروژه: اتوبان تهران- کرج، اتوبان
 
         private static double CalculateUserPoint(Guid userId)
         {
+            TaavoniUT3SMSManager.Model.Payment p = new Model.Payment();   
             try
             {
                 double result = 0;
+                
                 if (m_model.Payments.Count(P => P.MemberID.Equals(userId)) <= 0)
                 {
                     result = 0;
@@ -136,11 +139,12 @@ result += "نشانی پروژه: اتوبان تهران- کرج، اتوبان
                 else
                 {
                     var payments = m_model.Payments.Where(P => P.MemberID.Equals(userId));
-
+                    PersianCalendar persian = new PersianCalendar();
                     foreach (var x in payments)
                     {
+                        p = x;
                         String[] dates = x.DateOfPayment.Split(new char[] { '/' });
-                        DateTime tempDateTime = new DateTime(int.Parse(dates[0]), int.Parse(dates[1]), int.Parse(dates[2]));
+                        DateTime tempDateTime = new DateTime(int.Parse(dates[0]), int.Parse(dates[1]), int.Parse(dates[2]), persian);
                         DateTime tempNowDate = GetPersianDateInstance(DateTime.Now);
                         double days = (tempNowDate - tempDateTime).TotalDays;
                         double moneyWeight = double.Parse(x.Fee) / 100000.0;
@@ -151,6 +155,7 @@ result += "نشانی پروژه: اتوبان تهران- کرج، اتوبان
             }
             catch (Exception ex)
             {
+                Console.WriteLine(p.ID);
                 return 0;
             }
         }
@@ -197,7 +202,7 @@ result += "نشانی پروژه: اتوبان تهران- کرج، اتوبان
         {
             System.Globalization.PersianCalendar jc = new System.Globalization.PersianCalendar();
             String tempdate = jc.GetYear(now) + ":" + jc.GetMonth(now) + ":" + jc.GetDayOfMonth(now);
-            return new DateTime(jc.GetYear(now), jc.GetMonth(now), jc.GetDayOfMonth(now));
+            return new DateTime(jc.GetYear(now), jc.GetMonth(now), jc.GetDayOfMonth(now), jc);
         }
     }
 }
