@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Globalization;
+using TaavoniUT3SMSManager.Model;
 
 namespace TaavoniUT3SMSManager
 {
@@ -14,19 +15,63 @@ namespace TaavoniUT3SMSManager
         static String signature = "تعاونی شماره 3 کارکنان دانشگاه تهران";
         static void Main(string[] args)
         {
-         //   Console.WriteLine(CalculateUserPoint(Guid.Parse("876A8A4B-2894-4197-B3B1-BA127B951C63")));
+           //    Console.WriteLine(CalculateUserPoint(Guid.Parse("876A8A4B-2894-4197-B3B1-BA127B951C63")));
             mRecievrThread = new Thread(() => { ThreadHandler(); });
             mRecievrThread.Start();
             mRecievrThread.Join();
+            //GetRankList();
         }
+
+        public static void GetRankList()
+        {
+            try
+            {
+                {
+                    var unsortRankList = (from p in m_model.MembersProfiles
+                                   select new
+                                   {
+                                       FirstName = p.FirstName,
+                                       LastName = p.LastName,
+                                       userId = p.MemberID,
+                                       NationalityCode = p.InternationalCode,
+                                       Point = CalculateUserPoint((Guid)p.MemberID)
+                                   }).ToList();
+                    var rankList = unsortRankList.OrderByDescending(P=>P.Point);
+                    List<RankModel> Result = new List<RankModel>();
+                    for (int i = 0; i < rankList.Count(); i++)
+                    {
+                        var x = rankList.ElementAt(i);
+                        Result.Add(new RankModel
+                        {
+                            FirstName = x.FirstName,
+                            LastName = x.LastName,
+                            UserId = (Guid)x.userId,
+                            UserName = x.NationalityCode,
+                            Point = x.Point,
+                            Rank = i+1
+                        });
+                    }
+
+
+                    foreach (var x in Result)
+                        Console.WriteLine(x.UserName + " : " + x.Point + " : " + x.Rank);
+
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+        }
+
         static void ThreadHandler()
         {
-            while(true)
+            while (true)
             {
                 try
                 {
                     var messages = Utility.SMS.GetMessage(SMSProfile.UserName, SMSProfile.Password, SMSProfile.Number);
-                    if(messages != null)
+                    if (messages != null)
                     {
                         foreach (var msg in messages)
                         {
@@ -38,12 +83,13 @@ namespace TaavoniUT3SMSManager
                                 if (msg.Body.Contains("1"))
                                 {
                                     var users = m_model.MemberContacts.Where(P => P.MobilePhone.Contains(msg.SenderNumber));
-                                    foreach(Model.MemberContact u in users)
+                                    foreach (Model.MemberContact u in users)
                                     {
-                                        
+
                                         var user = m_model.MembersProfiles.Single(P => P.MemberID.Equals(u.MemberID));
                                         var point = CalculateUserPoint((Guid)u.MemberID);
-                                        var result = "عضو محترم " + user.FirstName + " " + user.LastName + " " + "امتیاز شما تا به امروز " + point + " می باشد.";
+                                        var rank = GetRankForUser((Guid)u.MemberID);
+                                        var result = "عضو محترم " + user.FirstName + " " + user.LastName + " " + "امتیاز شما تا به امروز " + point + "  و رتبه شما  " + rank +  " می باشد.";
                                         result += signature;
                                         TaavoniUT3SMSManager.Utility.SMS.SendSMS(msg.SenderNumber, SMSProfile.UserName, SMSProfile.Password, result, SMSProfile.Number);
                                     }
@@ -55,8 +101,9 @@ namespace TaavoniUT3SMSManager
                                     {
 
                                         var user = m_model.MembersProfiles.Single(P => P.MemberID.Equals(u.MemberID));
-                                        var point = GetUserPayment((Guid)u.MemberID);
-                                        var result = "عضو محترم " + user.FirstName + " " + user.LastName + " " + "پرداخت شما تا به امروز " + point + " می باشد.";
+                                        var point = GetUserPayment((Guid)u.MemberID).Item2;
+                                        var count = GetUserPayment((Guid)u.MemberID).Item1;
+                                        var result = "عضو محترم " + user.FirstName + " " + user.LastName + " " + "پرداخت شما تا به امروز " + point + " و تعداد دفعات پرداخت " + count + " می باشد.";
                                         result += signature;
                                         TaavoniUT3SMSManager.Utility.SMS.SendSMS(msg.SenderNumber, SMSProfile.UserName, SMSProfile.Password, result, SMSProfile.Number);
                                     }
@@ -64,9 +111,9 @@ namespace TaavoniUT3SMSManager
                                 else if (msg.Body.Contains("3"))
                                 {
                                     var Result = "تلفن 88966770 و 88966849 " + "\r\n";
-                                        Result += "ایمیل: taavoniut3@ut.ac.ir  \r\n";
-                                        Result += "نشانی وبلاگ: taavoniut3.blogfa.ir \r\n";
-                                        Result += "پایگاه اطلاع رسانی: taavoniut3.ir \r\n";
+                                    Result += "ایمیل: taavoniut3@ut.ac.ir  \r\n";
+                                    Result += "نشانی وبلاگ: taavoniut3.blogfa.ir \r\n";
+                                    Result += "پایگاه اطلاع رسانی: taavoniut3.ir \r\n";
 
                                     Result += signature;
                                     TaavoniUT3SMSManager.Utility.SMS.SendSMS(msg.SenderNumber, SMSProfile.UserName, SMSProfile.Password, Result, SMSProfile.Number);
@@ -75,7 +122,7 @@ namespace TaavoniUT3SMSManager
                                 {
                                     var result = "";
                                     result += "نشانی تعاونی: بلوار کشاورز، خیابان وصال، کوچه شاهد، پلاک 8، طبقه دوم. \r\n";
-result += "نشانی پروژه: اتوبان تهران- کرج، اتوبان آزادگان شمال، کوهک، نسیم شانزدهم، جنب پروژه آفتاب 22 مجلس شورای اسلامی \r\n";
+                                    result += "نشانی پروژه: اتوبان تهران- کرج، اتوبان آزادگان شمال، کوهک، نسیم شانزدهم، جنب پروژه آفتاب 22 مجلس شورای اسلامی \r\n";
 
                                     result += signature;
                                     TaavoniUT3SMSManager.Utility.SMS.SendSMS(msg.SenderNumber, SMSProfile.UserName, SMSProfile.Password, result, SMSProfile.Number);
@@ -117,20 +164,57 @@ result += "نشانی پروژه: اتوبان تهران- کرج، اتوبان
                         System.Threading.Thread.Sleep(1000);
                     }
                 }
-                catch(Exception ex)
+                catch (Exception ex)
                 {
                     Console.WriteLine(ex.Message);
                 }
             }
         }
 
+        public static int GetRankForUser(Guid userId)
+        {
+            System.Globalization.PersianCalendar jc = new System.Globalization.PersianCalendar();
+            String tempdate = jc.GetYear((DateTime)DateTime.Now) + ":" + jc.GetMonth((DateTime)DateTime.Now) + ":" + jc.GetDayOfMonth((DateTime)DateTime.Now);
+            var unsortRankList = (from p in m_model.MembersProfiles
+                                  select new
+                                  {
+                                      FirstName = p.FirstName,
+                                      LastName = p.LastName,
+                                      userId = p.MemberID,
+                                      NationalityCode = p.InternationalCode,
+                                      Point = CalculateUserPoint((Guid)p.MemberID),
+                                      Date = p.CreateDate != null ? p.CreateDate : tempdate,
+                                      IsApproved = p.aspnet_User.aspnet_Membership.IsApproved
+                                  }).ToList();
+            var rankList = unsortRankList.OrderByDescending(P => P.Point);
+            List<RankModel> Result = new List<RankModel>();
+            for (int i = 0; i < rankList.Count(); i++)
+            {
+                var x = rankList.ElementAt(i);
+                Result.Add(new RankModel
+                {
+                    FirstName = x.FirstName,
+                    LastName = x.LastName,
+                    UserId = (Guid)x.userId,
+                    UserName = x.NationalityCode,
+                    Point = x.Point,
+                    Rank = i + 1,
+                    IsApproved = x.IsApproved,
+                    Date = x.Date
+                });
+            }
+
+            return Result.Single(P => P.UserId.Equals(userId)).Rank;
+
+        }
+
         private static double CalculateUserPoint(Guid userId)
         {
-            TaavoniUT3SMSManager.Model.Payment p = new Model.Payment();   
+            TaavoniUT3SMSManager.Model.Payment p = new Model.Payment();
             try
             {
                 double result = 0;
-                
+
                 if (m_model.Payments.Count(P => P.MemberID.Equals(userId)) <= 0)
                 {
                     result = 0;
@@ -161,33 +245,34 @@ result += "نشانی پروژه: اتوبان تهران- کرج، اتوبان
         }
 
 
-        private static double GetUserPayment(Guid userId)
+        private static Tuple<int, double> GetUserPayment(Guid userId)
         {
             try
             {
-                double result = 0;
+                Tuple<int, double> result = Tuple.Create(0, 0.0);
+               
                 if (m_model.Payments.Count(P => P.MemberID.Equals(userId)) <= 0)
                 {
-                    result = 0;
                     return result;
                 }
                 else
                 {
                     var payments = m_model.Payments.Where(P => P.MemberID.Equals(userId));
-
+                    double tmpResult = 0;
                     foreach (var x in payments)
                     {
                         String[] dates = x.DateOfPayment.Split(new char[] { '/' });
                         DateTime tempDateTime = new DateTime(int.Parse(dates[0]), int.Parse(dates[1]), int.Parse(dates[2]));
                         DateTime tempNowDate = GetPersianDateInstance(DateTime.Now);
-                        result += double.Parse(x.Fee);
+                        tmpResult += double.Parse(x.Fee);
                     }
-                    return result;
+
+                    return new Tuple<int, double>(payments.Count(), tmpResult);
                 }
             }
             catch (Exception ex)
             {
-                return 0;
+                return Tuple.Create(0, 0.0);
             }
         }
 
