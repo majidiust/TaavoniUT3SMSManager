@@ -28,6 +28,7 @@ namespace TaavoniUT3SMSManager.Utility
             catch (Exception ex)
             {
                 Console.WriteLine("Error  : " + ex.Message);
+                smsClient = new v2SoapClient();
             }
         }
 
@@ -42,6 +43,7 @@ namespace TaavoniUT3SMSManager.Utility
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
+                smsClient = new v2SoapClient();
                 return null;
             }
         }

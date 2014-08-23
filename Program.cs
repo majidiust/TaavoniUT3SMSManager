@@ -15,8 +15,8 @@ namespace TaavoniUT3SMSManager
         static String signature = "تعاونی شماره 3 کارکنان دانشگاه تهران";
         static void Main(string[] args)
         {
-           //    Console.WriteLine(CalculateUserPoint(Guid.Parse("876A8A4B-2894-4197-B3B1-BA127B951C63")));
-            mRecievrThread = new Thread(() => { ThreadHandler(); });
+          //  Console.WriteLine(GetUserPayment(Guid.Parse("2756e071-03c5-47cd-ad93-f51bff32b3d1")).Item2);
+             mRecievrThread = new Thread(() => { ThreadHandler(); });
             mRecievrThread.Start();
             mRecievrThread.Join();
             //GetRankList();
