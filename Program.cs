@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading;
 using System.Globalization;
 using TaavoniUT3SMSManager.Model;
+using System.Runtime.InteropServices;
 
 namespace TaavoniUT3SMSManager
 {
