@@ -18,6 +18,7 @@ namespace TaavoniUT3SMSManager
         {
           //  Console.WriteLine(GetUserPayment(Guid.Parse("2756e071-03c5-47cd-ad93-f51bff32b3d1")).Item2);
              mRecievrThread = new Thread(() => { ThreadHandler(); });
+             new Thread(() => { CalcUserRanks(); }).Start();
             mRecievrThread.Start();
             mRecievrThread.Join();
             //GetRankList();
@@ -62,6 +63,46 @@ namespace TaavoniUT3SMSManager
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
+            }
+        }
+
+        static void CalcUserRanks()
+        {
+            while (true)
+            {
+                try
+                {
+                    foreach (var x in m_model.MembersProfiles)
+                    {
+                        if (x.IsDisabled == null || x.IsDisabled == false)
+                        {
+                            x.Point = String.Format("{0}", CalculateUserPoint((Guid)x.MemberID));
+                        }
+                        else
+                        {
+                            x.Point = "0";
+                        }
+                    }
+                    m_model.SubmitChanges();
+
+                    var rankList = m_model.MembersProfiles.OrderByDescending(P => P.Point);
+                    int index = 0;
+                    foreach (var x in rankList)
+                    {
+                        x.Rank = index.ToString();
+                        index++;
+                    }
+
+                    m_model.SubmitChanges();
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                }
+                finally
+                {
+                    Thread.Sleep(30000);
+                }
             }
         }
 

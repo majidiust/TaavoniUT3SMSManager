@@ -139,6 +139,7 @@
       <Association Name="aspnet_User_MembersEmployee" Member="MembersEmployees" ThisKey="UserId" OtherKey="MemberID" Type="MembersEmployee" />
       <Association Name="aspnet_User_MembersIsargari" Member="MembersIsargaris" ThisKey="UserId" OtherKey="MemberID" Type="MembersIsargari" />
       <Association Name="aspnet_User_MemberSponserShip" Member="MemberSponserShips" ThisKey="UserId" OtherKey="MemberID" Type="MemberSponserShip" />
+      <Association Name="aspnet_User_MembersProfile1" Member="MembersProfile1s" ThisKey="UserId" OtherKey="MemberID" Type="MembersProfile1" />
       <Association Name="aspnet_User_MembersProfile" Member="MembersProfiles" ThisKey="UserId" OtherKey="MemberID" Type="MembersProfile" />
       <Association Name="aspnet_Application_aspnet_User" Member="aspnet_Application" ThisKey="ApplicationId" OtherKey="ApplicationId" Type="aspnet_Application" IsForeignKey="true" />
     </Type>
@@ -174,6 +175,7 @@
     <Type Name="City">
       <Column Name="CityId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="CityName" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Association Name="City_MembersProfile1" Member="MembersProfile1s" ThisKey="CityId" OtherKey="CityID" Type="MembersProfile1" />
       <Association Name="City_MembersProfile" Member="MembersProfiles" ThisKey="CityId" OtherKey="CityID" Type="MembersProfile" />
     </Type>
   </Table>
@@ -181,6 +183,7 @@
     <Type Name="Degree">
       <Column Name="DegreeId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="DegreeValue" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Association Name="Degree_MembersProfile1" Member="MembersProfile1s" ThisKey="DegreeId" OtherKey="DegreeID" Type="MembersProfile1" />
       <Association Name="Degree_MembersProfile" Member="MembersProfiles" ThisKey="DegreeId" OtherKey="DegreeID" Type="MembersProfile" />
     </Type>
   </Table>
@@ -287,6 +290,45 @@
       <Association Name="aspnet_User_MemberSponserShip" Member="aspnet_User" ThisKey="MemberID" OtherKey="UserId" Type="aspnet_User" IsForeignKey="true" />
     </Type>
   </Table>
+  <Table Name="dbo.MembersRelations" Member="MembersRelations">
+    <Type Name="MembersRelation">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="FirstName" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="LastName" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="InternationalCode" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="Relation" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="RelationType" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Tel" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="Gender" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="JobName" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="JobPlace" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="Age" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="MembershipID" Type="System.Guid" DbType="UniqueIdentifier" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.MembersProfile" Member="MembersProfile1s">
+    <Type Name="MembersProfile1">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="FirstName" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="LastName" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="Gender" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="CityID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="DegreeID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="InternationalCode" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="IDCard" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="IDCardPlace" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="PersonalNumber" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="BirthDate" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="MemberID" Type="System.Guid" DbType="UniqueIdentifier" CanBeNull="true" />
+      <Column Name="CreateDate" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="IsDisabled" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="Point" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="Rank" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Association Name="aspnet_User_MembersProfile1" Member="aspnet_User" ThisKey="MemberID" OtherKey="UserId" Type="aspnet_User" IsForeignKey="true" />
+      <Association Name="City_MembersProfile1" Member="City" ThisKey="CityID" OtherKey="CityId" Type="City" IsForeignKey="true" />
+      <Association Name="Degree_MembersProfile1" Member="Degree" ThisKey="DegreeID" OtherKey="DegreeId" Type="Degree" IsForeignKey="true" />
+    </Type>
+  </Table>
   <Table Name="dbo.MembersProfile" Member="MembersProfiles">
     <Type Name="MembersProfile">
       <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -302,25 +344,12 @@
       <Column Name="BirthDate" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
       <Column Name="MemberID" Type="System.Guid" DbType="UniqueIdentifier" CanBeNull="true" />
       <Column Name="CreateDate" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="IsDisabled" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="Point" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="Rank" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
       <Association Name="aspnet_User_MembersProfile" Member="aspnet_User" ThisKey="MemberID" OtherKey="UserId" Type="aspnet_User" IsForeignKey="true" />
       <Association Name="City_MembersProfile" Member="City" ThisKey="CityID" OtherKey="CityId" Type="City" IsForeignKey="true" />
       <Association Name="Degree_MembersProfile" Member="Degree" ThisKey="DegreeID" OtherKey="DegreeId" Type="Degree" IsForeignKey="true" />
-    </Type>
-  </Table>
-  <Table Name="dbo.MembersRelations" Member="MembersRelations">
-    <Type Name="MembersRelation">
-      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="FirstName" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-      <Column Name="LastName" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-      <Column Name="InternationalCode" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-      <Column Name="Relation" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-      <Column Name="RelationType" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="Tel" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-      <Column Name="Gender" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="JobName" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-      <Column Name="JobPlace" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-      <Column Name="Age" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="MembershipID" Type="System.Guid" DbType="UniqueIdentifier" CanBeNull="true" />
     </Type>
   </Table>
 </Database>
