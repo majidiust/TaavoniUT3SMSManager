@@ -6,7 +6,7 @@
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{8D7068F1-5F9C-4177-91C2-99E871E00F87}</ProjectGuid>
-    <OutputType>WinExe</OutputType>
+    <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>TaavoniUT3SMSManager</RootNamespace>
     <AssemblyName>TaavoniUT3SMSManager</AssemblyName>
@@ -63,6 +63,16 @@
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
     <Compile Include="RankModel.cs" />
+    <Compile Include="Service References\FarapayamakRecvService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\FarapayamakSend\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
     <Compile Include="Service References\GhasedakSMSService\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -85,6 +95,26 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+    <None Include="Service References\FarapayamakRecvService\receive.wsdl" />
+    <None Include="Service References\FarapayamakRecvService\TaavoniUT3SMSManager.FarapayamakRecvService.MessagesBL.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\FarapayamakRecvService\TaavoniUT3SMSManager.FarapayamakRecvService.MsgReceptions.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\FarapayamakSend\send.wsdl" />
+    <None Include="Service References\FarapayamakSend\TaavoniUT3SMSManager.FarapayamakSend.ArrayOfInt.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\FarapayamakSend\TaavoniUT3SMSManager.FarapayamakSend.ArrayOfLong.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\FarapayamakSend\TaavoniUT3SMSManager.FarapayamakSend.ArrayOfString.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\FarapayamakSend\TaavoniUT3SMSManager.FarapayamakSend.MessagesBL.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Service References\GhasedakSMSService\TaavoniUT3SMSManager.GhasedakSMSService.ArrayOfInt.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
@@ -100,6 +130,8 @@
     <None Include="Service References\GhasedakSMSService\v2.wsdl" />
   </ItemGroup>
   <ItemGroup>
+    <WCFMetadataStorage Include="Service References\FarapayamakRecvService\" />
+    <WCFMetadataStorage Include="Service References\FarapayamakSend\" />
     <WCFMetadataStorage Include="Service References\GhasedakSMSService\" />
   </ItemGroup>
   <ItemGroup>
@@ -120,6 +152,36 @@
   <ItemGroup>
     <None Include="Model\Database.dbml.layout">
       <DependentUpon>Database.dbml</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\FarapayamakSend\send.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\FarapayamakSend\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\FarapayamakSend\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\FarapayamakSend\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\FarapayamakRecvService\receive.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\FarapayamakRecvService\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\FarapayamakRecvService\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\FarapayamakRecvService\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -9,17 +9,15 @@
       <Column Name="Action" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
     </Type>
   </Table>
-  <Table Name="dbo.Payment" Member="Payments">
-    <Type Name="Payment">
-      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="DateOfPayment" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
-      <Column Name="DateofEntry" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Column Name="Fee" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-      <Column Name="MemberID" Type="System.Guid" DbType="UniqueIdentifier" CanBeNull="true" />
-      <Column Name="SourceBank" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-      <Column Name="DestinationBank" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-      <Column Name="ReceiptID" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-      <Column Name="PaymentMethod" Type="System.Int32" DbType="Int" CanBeNull="true" />
+  <Table Name="hiva.PicOfAlbums" Member="PicOfAlbums">
+    <Type Name="PicOfAlbum">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="AlbumId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="CreateDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="CreatorId" Type="System.Guid" DbType="UniqueIdentifier" CanBeNull="true" />
+      <Column Name="[Desc]" Member="Desc" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="State" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="Path" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
     </Type>
   </Table>
   <Table Name="dbo.aspnet_Applications" Member="aspnet_Applications">
@@ -139,7 +137,6 @@
       <Association Name="aspnet_User_MembersEmployee" Member="MembersEmployees" ThisKey="UserId" OtherKey="MemberID" Type="MembersEmployee" />
       <Association Name="aspnet_User_MembersIsargari" Member="MembersIsargaris" ThisKey="UserId" OtherKey="MemberID" Type="MembersIsargari" />
       <Association Name="aspnet_User_MemberSponserShip" Member="MemberSponserShips" ThisKey="UserId" OtherKey="MemberID" Type="MemberSponserShip" />
-      <Association Name="aspnet_User_MembersProfile1" Member="MembersProfile1s" ThisKey="UserId" OtherKey="MemberID" Type="MembersProfile1" />
       <Association Name="aspnet_User_MembersProfile" Member="MembersProfiles" ThisKey="UserId" OtherKey="MemberID" Type="MembersProfile" />
       <Association Name="aspnet_Application_aspnet_User" Member="aspnet_Application" ThisKey="ApplicationId" OtherKey="ApplicationId" Type="aspnet_Application" IsForeignKey="true" />
     </Type>
@@ -175,7 +172,6 @@
     <Type Name="City">
       <Column Name="CityId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="CityName" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-      <Association Name="City_MembersProfile1" Member="MembersProfile1s" ThisKey="CityId" OtherKey="CityID" Type="MembersProfile1" />
       <Association Name="City_MembersProfile" Member="MembersProfiles" ThisKey="CityId" OtherKey="CityID" Type="MembersProfile" />
     </Type>
   </Table>
@@ -183,7 +179,6 @@
     <Type Name="Degree">
       <Column Name="DegreeId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="DegreeValue" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-      <Association Name="Degree_MembersProfile1" Member="MembersProfile1s" ThisKey="DegreeId" OtherKey="DegreeID" Type="MembersProfile1" />
       <Association Name="Degree_MembersProfile" Member="MembersProfiles" ThisKey="DegreeId" OtherKey="DegreeID" Type="MembersProfile" />
     </Type>
   </Table>
@@ -290,45 +285,6 @@
       <Association Name="aspnet_User_MemberSponserShip" Member="aspnet_User" ThisKey="MemberID" OtherKey="UserId" Type="aspnet_User" IsForeignKey="true" />
     </Type>
   </Table>
-  <Table Name="dbo.MembersRelations" Member="MembersRelations">
-    <Type Name="MembersRelation">
-      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="FirstName" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-      <Column Name="LastName" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-      <Column Name="InternationalCode" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-      <Column Name="Relation" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-      <Column Name="RelationType" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="Tel" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-      <Column Name="Gender" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="JobName" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-      <Column Name="JobPlace" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-      <Column Name="Age" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="MembershipID" Type="System.Guid" DbType="UniqueIdentifier" CanBeNull="true" />
-    </Type>
-  </Table>
-  <Table Name="dbo.MembersProfile" Member="MembersProfile1s">
-    <Type Name="MembersProfile1">
-      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="FirstName" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-      <Column Name="LastName" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-      <Column Name="Gender" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
-      <Column Name="CityID" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="DegreeID" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="InternationalCode" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-      <Column Name="IDCard" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-      <Column Name="IDCardPlace" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-      <Column Name="PersonalNumber" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-      <Column Name="BirthDate" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-      <Column Name="MemberID" Type="System.Guid" DbType="UniqueIdentifier" CanBeNull="true" />
-      <Column Name="CreateDate" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-      <Column Name="IsDisabled" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
-      <Column Name="Point" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-      <Column Name="Rank" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-      <Association Name="aspnet_User_MembersProfile1" Member="aspnet_User" ThisKey="MemberID" OtherKey="UserId" Type="aspnet_User" IsForeignKey="true" />
-      <Association Name="City_MembersProfile1" Member="City" ThisKey="CityID" OtherKey="CityId" Type="City" IsForeignKey="true" />
-      <Association Name="Degree_MembersProfile1" Member="Degree" ThisKey="DegreeID" OtherKey="DegreeId" Type="Degree" IsForeignKey="true" />
-    </Type>
-  </Table>
   <Table Name="dbo.MembersProfile" Member="MembersProfiles">
     <Type Name="MembersProfile">
       <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -345,11 +301,53 @@
       <Column Name="MemberID" Type="System.Guid" DbType="UniqueIdentifier" CanBeNull="true" />
       <Column Name="CreateDate" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
       <Column Name="IsDisabled" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
-      <Column Name="Point" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-      <Column Name="Rank" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="Point" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="Rank" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Payment" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="DocumentCode" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
       <Association Name="aspnet_User_MembersProfile" Member="aspnet_User" ThisKey="MemberID" OtherKey="UserId" Type="aspnet_User" IsForeignKey="true" />
       <Association Name="City_MembersProfile" Member="City" ThisKey="CityID" OtherKey="CityId" Type="City" IsForeignKey="true" />
       <Association Name="Degree_MembersProfile" Member="Degree" ThisKey="DegreeID" OtherKey="DegreeId" Type="Degree" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.MembersRelations" Member="MembersRelations">
+    <Type Name="MembersRelation">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="FirstName" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="LastName" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="InternationalCode" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="Relation" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="RelationType" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Tel" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="Gender" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="JobName" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="JobPlace" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="Age" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="MembershipID" Type="System.Guid" DbType="UniqueIdentifier" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Payment" Member="Payments">
+    <Type Name="Payment">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="DateOfPayment" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="DateofEntry" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="Fee" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="MemberID" Type="System.Guid" DbType="UniqueIdentifier" CanBeNull="true" />
+      <Column Name="SourceBank" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="DestinationBank" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="ReceiptID" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="PaymentMethod" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="hiva.Album" Member="Albums">
+    <Type Name="Album">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="CreateDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="CreatorId" Type="System.Guid" DbType="UniqueIdentifier" CanBeNull="true" />
+      <Column Name="Explanation" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="State" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="ImageTitlePoster" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
     </Type>
   </Table>
 </Database>

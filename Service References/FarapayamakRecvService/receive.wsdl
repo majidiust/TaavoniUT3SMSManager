@@ -1,0 +1,505 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="GetInboxCount">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="username" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="password" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="isRead" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetInboxCountResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="GetInboxCountResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetMessages">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="username" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="password" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="location" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="from" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="index" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="count" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetMessagesResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetMessagesResult" type="tns:ArrayOfMessagesBL" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfMessagesBL">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="MessagesBL" nillable="true" type="tns:MessagesBL" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="MessagesBL">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:BaseBL">
+            <s:sequence>
+              <s:element minOccurs="1" maxOccurs="1" name="MsgID" type="s:long" />
+              <s:element minOccurs="1" maxOccurs="1" name="UserID" type="s:int" />
+              <s:element minOccurs="1" maxOccurs="1" name="LinkID" type="s:int" />
+              <s:element minOccurs="1" maxOccurs="1" name="NumberID" type="s:int" />
+              <s:element minOccurs="1" maxOccurs="1" name="Tariff" type="s:double" />
+              <s:element minOccurs="1" maxOccurs="1" name="MsgType" type="s:unsignedByte" />
+              <s:element minOccurs="0" maxOccurs="1" name="Body" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="Udh" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="SendDate" type="s:dateTime" />
+              <s:element minOccurs="0" maxOccurs="1" name="Sender" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="Receiver" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="FirstLocation" type="s:int" />
+              <s:element minOccurs="1" maxOccurs="1" name="CurrentLocation" type="s:int" />
+              <s:element minOccurs="1" maxOccurs="1" name="Parts" type="s:int" />
+              <s:element minOccurs="1" maxOccurs="1" name="IsFlash" type="s:boolean" />
+              <s:element minOccurs="1" maxOccurs="1" name="IsRead" type="s:boolean" />
+              <s:element minOccurs="1" maxOccurs="1" name="IsUnicode" type="s:boolean" />
+              <s:element minOccurs="1" maxOccurs="1" name="Credit" type="s:double" />
+              <s:element minOccurs="1" maxOccurs="1" name="Module" type="s:int" />
+              <s:element minOccurs="1" maxOccurs="1" name="RecCount" type="s:int" />
+              <s:element minOccurs="1" maxOccurs="1" name="RecFailed" type="s:int" />
+              <s:element minOccurs="1" maxOccurs="1" name="RecSuccess" type="s:int" />
+              <s:element minOccurs="1" maxOccurs="1" name="IsMoneyBack" type="s:boolean" />
+              <s:element minOccurs="1" maxOccurs="1" name="UserStepedMaster" type="s:int" />
+              <s:element minOccurs="1" maxOccurs="1" name="UserMaster" type="s:int" />
+              <s:element minOccurs="1" maxOccurs="1" name="MoneyBackCount" type="s:int" />
+              <s:element minOccurs="1" maxOccurs="1" name="MoneyBackLevel" type="s:int" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="BaseBL" />
+      <s:element name="GetMessagesWithChangeIsRead">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="username" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="password" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="location" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="from" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="index" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="count" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="isRead" type="s:boolean" />
+            <s:element minOccurs="1" maxOccurs="1" name="changeIsRead" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetMessagesWithChangeIsReadResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetMessagesWithChangeIsReadResult" type="tns:ArrayOfMessagesBL" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ChangeMessageIsRead">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="username" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="password" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="msgIds" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ChangeMessageIsReadResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="ChangeMessageIsReadResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetMessagesByDate">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="username" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="password" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="location" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="from" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="index" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="count" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="dateFrom" type="s:dateTime" />
+            <s:element minOccurs="1" maxOccurs="1" name="dateTo" type="s:dateTime" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetMessagesByDateResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetMessagesByDateResult" type="tns:ArrayOfMessagesBL" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetUsersMessagesByDate">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="username" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="password" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="location" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="from" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="index" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="count" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="dateFrom" type="s:dateTime" />
+            <s:element minOccurs="1" maxOccurs="1" name="dateTo" type="s:dateTime" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetUsersMessagesByDateResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetUsersMessagesByDateResult" type="tns:ArrayOfMessagesBL" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetMessageStr">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="username" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="password" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="location" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="from" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="index" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="count" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetMessageStrResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetMessageStrResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="RemoveMessages">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="username" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="password" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="location" type="tns:MessageLocation" />
+            <s:element minOccurs="0" maxOccurs="1" name="msgIds" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:simpleType name="MessageLocation">
+        <s:restriction base="s:string">
+          <s:enumeration value="Received" />
+          <s:enumeration value="Sent" />
+          <s:enumeration value="Removed" />
+          <s:enumeration value="Deleted" />
+        </s:restriction>
+      </s:simpleType>
+      <s:element name="RemoveMessagesResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="RemoveMessagesResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetMessagesReceptions">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="username" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="password" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="msgId" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="fromRows" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetMessagesReceptionsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetMessagesReceptionsResult" type="tns:ArrayOfMsgReceptions" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfMsgReceptions">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="MsgReceptions" nillable="true" type="tns:MsgReceptions" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="MsgReceptions">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="RecNumber" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SendDate" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="RecStatus" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DeliveryStatus" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="RecID" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="GetInboxCountSoapIn">
+    <wsdl:part name="parameters" element="tns:GetInboxCount" />
+  </wsdl:message>
+  <wsdl:message name="GetInboxCountSoapOut">
+    <wsdl:part name="parameters" element="tns:GetInboxCountResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetMessagesSoapIn">
+    <wsdl:part name="parameters" element="tns:GetMessages" />
+  </wsdl:message>
+  <wsdl:message name="GetMessagesSoapOut">
+    <wsdl:part name="parameters" element="tns:GetMessagesResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetMessagesWithChangeIsReadSoapIn">
+    <wsdl:part name="parameters" element="tns:GetMessagesWithChangeIsRead" />
+  </wsdl:message>
+  <wsdl:message name="GetMessagesWithChangeIsReadSoapOut">
+    <wsdl:part name="parameters" element="tns:GetMessagesWithChangeIsReadResponse" />
+  </wsdl:message>
+  <wsdl:message name="ChangeMessageIsReadSoapIn">
+    <wsdl:part name="parameters" element="tns:ChangeMessageIsRead" />
+  </wsdl:message>
+  <wsdl:message name="ChangeMessageIsReadSoapOut">
+    <wsdl:part name="parameters" element="tns:ChangeMessageIsReadResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetMessagesByDateSoapIn">
+    <wsdl:part name="parameters" element="tns:GetMessagesByDate" />
+  </wsdl:message>
+  <wsdl:message name="GetMessagesByDateSoapOut">
+    <wsdl:part name="parameters" element="tns:GetMessagesByDateResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetUsersMessagesByDateSoapIn">
+    <wsdl:part name="parameters" element="tns:GetUsersMessagesByDate" />
+  </wsdl:message>
+  <wsdl:message name="GetUsersMessagesByDateSoapOut">
+    <wsdl:part name="parameters" element="tns:GetUsersMessagesByDateResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetMessageStrSoapIn">
+    <wsdl:part name="parameters" element="tns:GetMessageStr" />
+  </wsdl:message>
+  <wsdl:message name="GetMessageStrSoapOut">
+    <wsdl:part name="parameters" element="tns:GetMessageStrResponse" />
+  </wsdl:message>
+  <wsdl:message name="RemoveMessagesSoapIn">
+    <wsdl:part name="parameters" element="tns:RemoveMessages" />
+  </wsdl:message>
+  <wsdl:message name="RemoveMessagesSoapOut">
+    <wsdl:part name="parameters" element="tns:RemoveMessagesResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetMessagesReceptionsSoapIn">
+    <wsdl:part name="parameters" element="tns:GetMessagesReceptions" />
+  </wsdl:message>
+  <wsdl:message name="GetMessagesReceptionsSoapOut">
+    <wsdl:part name="parameters" element="tns:GetMessagesReceptionsResponse" />
+  </wsdl:message>
+  <wsdl:portType name="ReceiveSoap">
+    <wsdl:operation name="GetInboxCount">
+      <wsdl:input message="tns:GetInboxCountSoapIn" />
+      <wsdl:output message="tns:GetInboxCountSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetMessages">
+      <wsdl:input message="tns:GetMessagesSoapIn" />
+      <wsdl:output message="tns:GetMessagesSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetMessagesWithChangeIsRead">
+      <wsdl:input message="tns:GetMessagesWithChangeIsReadSoapIn" />
+      <wsdl:output message="tns:GetMessagesWithChangeIsReadSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ChangeMessageIsRead">
+      <wsdl:input message="tns:ChangeMessageIsReadSoapIn" />
+      <wsdl:output message="tns:ChangeMessageIsReadSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetMessagesByDate">
+      <wsdl:input message="tns:GetMessagesByDateSoapIn" />
+      <wsdl:output message="tns:GetMessagesByDateSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetUsersMessagesByDate">
+      <wsdl:input message="tns:GetUsersMessagesByDateSoapIn" />
+      <wsdl:output message="tns:GetUsersMessagesByDateSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetMessageStr">
+      <wsdl:input message="tns:GetMessageStrSoapIn" />
+      <wsdl:output message="tns:GetMessageStrSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="RemoveMessages">
+      <wsdl:input message="tns:RemoveMessagesSoapIn" />
+      <wsdl:output message="tns:RemoveMessagesSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetMessagesReceptions">
+      <wsdl:input message="tns:GetMessagesReceptionsSoapIn" />
+      <wsdl:output message="tns:GetMessagesReceptionsSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="ReceiveSoap" type="tns:ReceiveSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetInboxCount">
+      <soap:operation soapAction="http://tempuri.org/GetInboxCount" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetMessages">
+      <soap:operation soapAction="http://tempuri.org/GetMessages" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetMessagesWithChangeIsRead">
+      <soap:operation soapAction="http://tempuri.org/GetMessagesWithChangeIsRead" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ChangeMessageIsRead">
+      <soap:operation soapAction="http://tempuri.org/ChangeMessageIsRead" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetMessagesByDate">
+      <soap:operation soapAction="http://tempuri.org/GetMessagesByDate" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUsersMessagesByDate">
+      <soap:operation soapAction="http://tempuri.org/GetUsersMessagesByDate" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetMessageStr">
+      <soap:operation soapAction="http://tempuri.org/GetMessageStr" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RemoveMessages">
+      <soap:operation soapAction="http://tempuri.org/RemoveMessages" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetMessagesReceptions">
+      <soap:operation soapAction="http://tempuri.org/GetMessagesReceptions" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="ReceiveSoap12" type="tns:ReceiveSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetInboxCount">
+      <soap12:operation soapAction="http://tempuri.org/GetInboxCount" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetMessages">
+      <soap12:operation soapAction="http://tempuri.org/GetMessages" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetMessagesWithChangeIsRead">
+      <soap12:operation soapAction="http://tempuri.org/GetMessagesWithChangeIsRead" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ChangeMessageIsRead">
+      <soap12:operation soapAction="http://tempuri.org/ChangeMessageIsRead" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetMessagesByDate">
+      <soap12:operation soapAction="http://tempuri.org/GetMessagesByDate" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUsersMessagesByDate">
+      <soap12:operation soapAction="http://tempuri.org/GetUsersMessagesByDate" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetMessageStr">
+      <soap12:operation soapAction="http://tempuri.org/GetMessageStr" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RemoveMessages">
+      <soap12:operation soapAction="http://tempuri.org/RemoveMessages" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetMessagesReceptions">
+      <soap12:operation soapAction="http://tempuri.org/GetMessagesReceptions" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="Receive">
+    <wsdl:port name="ReceiveSoap" binding="tns:ReceiveSoap">
+      <soap:address location="http://api.payamak-panel.com/post/receive.asmx" />
+    </wsdl:port>
+    <wsdl:port name="ReceiveSoap12" binding="tns:ReceiveSoap12">
+      <soap12:address location="http://api.payamak-panel.com/post/receive.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

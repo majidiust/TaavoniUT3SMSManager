@@ -7,8 +7,8 @@ namespace TaavoniUT3SMSManager
 {
     public class SMSProfile
     {
-        public static String UserName = "t.ut3";
-        public static String Password = "gh7343303";
-        public static string Number = "100088966770";
+        public static String UserName = "lvlajid";
+        public static String Password = "K!c11235";
+        public static string Number = "50005000084402";
     }
 }

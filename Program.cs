@@ -16,9 +16,9 @@ namespace TaavoniUT3SMSManager
         static String signature = "تعاونی شماره 3 کارکنان دانشگاه تهران";
         static void Main(string[] args)
         {
-          //  Console.WriteLine(GetUserPayment(Guid.Parse("2756e071-03c5-47cd-ad93-f51bff32b3d1")).Item2);
-             mRecievrThread = new Thread(() => { ThreadHandler(); });
-             new Thread(() => { CalcUserRanks(); }).Start();
+            //  Console.WriteLine(GetUserPayment(Guid.Parse("2756e071-03c5-47cd-ad93-f51bff32b3d1")).Item2);
+            mRecievrThread = new Thread(() => { ThreadHandler(); });
+            new Thread(() => { CalcUserRanks(); }).Start();
             mRecievrThread.Start();
             mRecievrThread.Join();
             //GetRankList();
@@ -30,15 +30,15 @@ namespace TaavoniUT3SMSManager
             {
                 {
                     var unsortRankList = (from p in m_model.MembersProfiles
-                                   select new
-                                   {
-                                       FirstName = p.FirstName,
-                                       LastName = p.LastName,
-                                       userId = p.MemberID,
-                                       NationalityCode = p.InternationalCode,
-                                       Point = CalculateUserPoint((Guid)p.MemberID)
-                                   }).ToList();
-                    var rankList = unsortRankList.OrderByDescending(P=>P.Point);
+                                          select new
+                                          {
+                                              FirstName = p.FirstName,
+                                              LastName = p.LastName,
+                                              userId = p.MemberID,
+                                              NationalityCode = p.InternationalCode,
+                                              Point = CalculateUserPoint((Guid)p.MemberID)
+                                          }).ToList();
+                    var rankList = unsortRankList.OrderByDescending(P => P.Point);
                     List<RankModel> Result = new List<RankModel>();
                     for (int i = 0; i < rankList.Count(); i++)
                     {
@@ -50,7 +50,7 @@ namespace TaavoniUT3SMSManager
                             UserId = (Guid)x.userId,
                             UserName = x.NationalityCode,
                             Point = x.Point,
-                            Rank = i+1
+                            Rank = i + 1
                         });
                     }
 
@@ -76,11 +76,11 @@ namespace TaavoniUT3SMSManager
                     {
                         if (x.IsDisabled == null || x.IsDisabled == false)
                         {
-                            x.Point = String.Format("{0}", CalculateUserPoint((Guid)x.MemberID));
+                            x.Point = double.Parse(String.Format("{0}", CalculateUserPoint((Guid)x.MemberID)));
                         }
                         else
                         {
-                            x.Point = "0";
+                            x.Point = 0.0;
                         }
                     }
                     m_model.SubmitChanges();
@@ -89,7 +89,7 @@ namespace TaavoniUT3SMSManager
                     int index = 0;
                     foreach (var x in rankList)
                     {
-                        x.Rank = index.ToString();
+                        x.Rank = index;
                         index++;
                     }
 
@@ -112,33 +112,33 @@ namespace TaavoniUT3SMSManager
             {
                 try
                 {
-                    var messages = Utility.SMS.GetMessage(SMSProfile.UserName, SMSProfile.Password, SMSProfile.Number);
+                    var messages = Utility.SMS.GetFarapayamakMessages(SMSProfile.UserName, SMSProfile.Password, SMSProfile.Number);
                     if (messages != null)
                     {
                         foreach (var msg in messages)
                         {
-                            Console.WriteLine("From : " + msg.SenderNumber);
+                            Console.WriteLine("From : " + msg.Sender);
                             Console.WriteLine("Msg : " + msg.Body);
-                            Console.WriteLine("Date : " + msg.ReceiveDate);
-                            if (m_model.MemberContacts.Count(P => P.MobilePhone.Contains(msg.SenderNumber)) > 0)
+                            Console.WriteLine("Date : " + msg.SendDate);
+                            if (m_model.MemberContacts.Count(P => P.MobilePhone.Contains(msg.Sender)) > 0)
                             {
                                 if (msg.Body.Contains("1"))
                                 {
-                                    var users = m_model.MemberContacts.Where(P => P.MobilePhone.Contains(msg.SenderNumber));
+                                    var users = m_model.MemberContacts.Where(P => P.MobilePhone.Contains(msg.Sender));
                                     foreach (Model.MemberContact u in users)
                                     {
 
                                         var user = m_model.MembersProfiles.Single(P => P.MemberID.Equals(u.MemberID));
                                         var point = CalculateUserPoint((Guid)u.MemberID);
                                         var rank = GetRankForUser((Guid)u.MemberID);
-                                        var result = "عضو محترم " + user.FirstName + " " + user.LastName + " " + "امتیاز شما تا به امروز " + point + "  و رتبه شما  " + rank +  " می باشد.";
+                                        var result = "عضو محترم " + user.FirstName + " " + user.LastName + " " + "امتیاز شما تا به امروز " + point + "  و رتبه شما  " + rank + " می باشد.";
                                         result += signature;
-                                        TaavoniUT3SMSManager.Utility.SMS.SendSMS(msg.SenderNumber, SMSProfile.UserName, SMSProfile.Password, result, SMSProfile.Number);
+                                        TaavoniUT3SMSManager.Utility.SMS.SendSMS(msg.Sender, SMSProfile.UserName, SMSProfile.Password, result, SMSProfile.Number, smsProvider);
                                     }
                                 }
                                 else if (msg.Body.Contains("2"))
                                 {
-                                    var users = m_model.MemberContacts.Where(P => P.MobilePhone.Contains(msg.SenderNumber));
+                                    var users = m_model.MemberContacts.Where(P => P.MobilePhone.Contains(msg.Sender));
                                     foreach (Model.MemberContact u in users)
                                     {
 
@@ -147,7 +147,7 @@ namespace TaavoniUT3SMSManager
                                         var count = GetUserPayment((Guid)u.MemberID).Item1;
                                         var result = "عضو محترم " + user.FirstName + " " + user.LastName + " " + "پرداخت شما تا به امروز " + point + " و تعداد دفعات پرداخت " + count + " می باشد.";
                                         result += signature;
-                                        TaavoniUT3SMSManager.Utility.SMS.SendSMS(msg.SenderNumber, SMSProfile.UserName, SMSProfile.Password, result, SMSProfile.Number);
+                                        TaavoniUT3SMSManager.Utility.SMS.SendSMS(msg.Sender, SMSProfile.UserName, SMSProfile.Password, result, SMSProfile.Number, smsProvider);
                                     }
                                 }
                                 else if (msg.Body.Contains("3"))
@@ -158,7 +158,7 @@ namespace TaavoniUT3SMSManager
                                     Result += "پایگاه اطلاع رسانی: taavoniut3.ir \r\n";
 
                                     Result += signature;
-                                    TaavoniUT3SMSManager.Utility.SMS.SendSMS(msg.SenderNumber, SMSProfile.UserName, SMSProfile.Password, Result, SMSProfile.Number);
+                                    TaavoniUT3SMSManager.Utility.SMS.SendSMS(msg.Sender, SMSProfile.UserName, SMSProfile.Password, Result, SMSProfile.Number, smsProvider);
                                 }
                                 else if (msg.Body.Contains("4"))
                                 {
@@ -167,19 +167,19 @@ namespace TaavoniUT3SMSManager
                                     result += "نشانی پروژه: اتوبان تهران- کرج، اتوبان آزادگان شمال، کوهک، نسیم شانزدهم، جنب پروژه آفتاب 22 مجلس شورای اسلامی \r\n";
 
                                     result += signature;
-                                    TaavoniUT3SMSManager.Utility.SMS.SendSMS(msg.SenderNumber, SMSProfile.UserName, SMSProfile.Password, result, SMSProfile.Number);
+                                    TaavoniUT3SMSManager.Utility.SMS.SendSMS(msg.Sender, SMSProfile.UserName, SMSProfile.Password, result, SMSProfile.Number, smsProvider);
                                 }
                                 else if (msg.Body.Contains("5"))
                                 {
                                     var result = "(شماره حساب 135718548 و حساب شبای 520180000000000135718548 نزد بانک تجارت شعبه اردیبهشت، کد 187";
                                     result += signature;
-                                    TaavoniUT3SMSManager.Utility.SMS.SendSMS(msg.SenderNumber, SMSProfile.UserName, SMSProfile.Password, result, SMSProfile.Number);
+                                    TaavoniUT3SMSManager.Utility.SMS.SendSMS(msg.Sender, SMSProfile.UserName, SMSProfile.Password, result, SMSProfile.Number, smsProvider);
                                 }
                                 else if (msg.Body.Contains("6"))
                                 {
                                     var result = "مشخصات مدیرعامل تعاونی: محمود حدادیان، به شماره همر ه 09194458649" + "و ایمیل mhaddadi@ut.ac.ir";
                                     result += signature;
-                                    TaavoniUT3SMSManager.Utility.SMS.SendSMS(msg.SenderNumber, SMSProfile.UserName, SMSProfile.Password, result, SMSProfile.Number);
+                                    TaavoniUT3SMSManager.Utility.SMS.SendSMS(msg.Sender, SMSProfile.UserName, SMSProfile.Password, result, SMSProfile.Number, smsProvider);
 
                                 }
                                 else
@@ -192,14 +192,14 @@ namespace TaavoniUT3SMSManager
                                     result += "5.شماره حساب تعاونی و شبای آن \r\n";
                                     result += "6. نام مدیرعامل و شماره همراه آن \r\n";
                                     result += "برای استفاده از هر منو شماره ردیف آن را به همین شماره پیامک کنید";
-                                    TaavoniUT3SMSManager.Utility.SMS.SendSMS(msg.SenderNumber, SMSProfile.UserName, SMSProfile.Password, result, SMSProfile.Number);
+                                    TaavoniUT3SMSManager.Utility.SMS.SendSMS(msg.Sender, SMSProfile.UserName, SMSProfile.Password, result, SMSProfile.Number, smsProvider);
 
                                 }
                             }
                             else
                             {
                                 var result = "شما از اعضای تعاونی نمیباشید. برای عضویت با شماره 88966770 تماس حاصل فرمایید. تعاونی شماره 3 کارکنان دانشگاه تهران";
-                                Utility.SMS.SendSMS(msg.SenderNumber, SMSProfile.UserName, SMSProfile.Password, result, SMSProfile.Number);
+                                Utility.SMS.SendSMS(msg.Sender, SMSProfile.UserName, SMSProfile.Password, result, SMSProfile.Number, smsProvider);
                             }
                         }
 
@@ -292,7 +292,7 @@ namespace TaavoniUT3SMSManager
             try
             {
                 Tuple<int, double> result = Tuple.Create(0, 0.0);
-               
+
                 if (m_model.Payments.Count(P => P.MemberID.Equals(userId)) <= 0)
                 {
                     return result;
@@ -331,5 +331,7 @@ namespace TaavoniUT3SMSManager
             String tempdate = jc.GetYear(now) + ":" + jc.GetMonth(now) + ":" + jc.GetDayOfMonth(now);
             return new DateTime(jc.GetYear(now), jc.GetMonth(now), jc.GetDayOfMonth(now), jc);
         }
+
+        public static string smsProvider = "FARAPAYAMAK";
     }
 }

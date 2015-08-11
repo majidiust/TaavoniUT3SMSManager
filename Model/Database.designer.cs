@@ -33,9 +33,9 @@ namespace TaavoniUT3SMSManager.Model
     partial void InsertActionOnMember(ActionOnMember instance);
     partial void UpdateActionOnMember(ActionOnMember instance);
     partial void DeleteActionOnMember(ActionOnMember instance);
-    partial void InsertPayment(Payment instance);
-    partial void UpdatePayment(Payment instance);
-    partial void DeletePayment(Payment instance);
+    partial void InsertPicOfAlbum(PicOfAlbum instance);
+    partial void UpdatePicOfAlbum(PicOfAlbum instance);
+    partial void DeletePicOfAlbum(PicOfAlbum instance);
     partial void Insertaspnet_Application(aspnet_Application instance);
     partial void Updateaspnet_Application(aspnet_Application instance);
     partial void Deleteaspnet_Application(aspnet_Application instance);
@@ -102,15 +102,18 @@ namespace TaavoniUT3SMSManager.Model
     partial void InsertMemberSponserShip(MemberSponserShip instance);
     partial void UpdateMemberSponserShip(MemberSponserShip instance);
     partial void DeleteMemberSponserShip(MemberSponserShip instance);
-    partial void InsertMembersRelation(MembersRelation instance);
-    partial void UpdateMembersRelation(MembersRelation instance);
-    partial void DeleteMembersRelation(MembersRelation instance);
-    partial void InsertMembersProfile1(MembersProfile1 instance);
-    partial void UpdateMembersProfile1(MembersProfile1 instance);
-    partial void DeleteMembersProfile1(MembersProfile1 instance);
     partial void InsertMembersProfile(MembersProfile instance);
     partial void UpdateMembersProfile(MembersProfile instance);
     partial void DeleteMembersProfile(MembersProfile instance);
+    partial void InsertMembersRelation(MembersRelation instance);
+    partial void UpdateMembersRelation(MembersRelation instance);
+    partial void DeleteMembersRelation(MembersRelation instance);
+    partial void InsertPayment(Payment instance);
+    partial void UpdatePayment(Payment instance);
+    partial void DeletePayment(Payment instance);
+    partial void InsertAlbum(Album instance);
+    partial void UpdateAlbum(Album instance);
+    partial void DeleteAlbum(Album instance);
     #endregion
 		
 		public DatabaseDataContext() : 
@@ -151,11 +154,11 @@ namespace TaavoniUT3SMSManager.Model
 			}
 		}
 		
-		public System.Data.Linq.Table<Payment> Payments
+		public System.Data.Linq.Table<PicOfAlbum> PicOfAlbums
 		{
 			get
 			{
-				return this.GetTable<Payment>();
+				return this.GetTable<PicOfAlbum>();
 			}
 		}
 		
@@ -335,6 +338,14 @@ namespace TaavoniUT3SMSManager.Model
 			}
 		}
 		
+		public System.Data.Linq.Table<MembersProfile> MembersProfiles
+		{
+			get
+			{
+				return this.GetTable<MembersProfile>();
+			}
+		}
+		
 		public System.Data.Linq.Table<MembersRelation> MembersRelations
 		{
 			get
@@ -343,19 +354,19 @@ namespace TaavoniUT3SMSManager.Model
 			}
 		}
 		
-		public System.Data.Linq.Table<MembersProfile1> MembersProfile1s
+		public System.Data.Linq.Table<Payment> Payments
 		{
 			get
 			{
-				return this.GetTable<MembersProfile1>();
+				return this.GetTable<Payment>();
 			}
 		}
 		
-		public System.Data.Linq.Table<MembersProfile> MembersProfiles
+		public System.Data.Linq.Table<Album> Albums
 		{
 			get
 			{
-				return this.GetTable<MembersProfile>();
+				return this.GetTable<Album>();
 			}
 		}
 	}
@@ -518,235 +529,187 @@ namespace TaavoniUT3SMSManager.Model
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Payment")]
-	public partial class Payment : INotifyPropertyChanging, INotifyPropertyChanged
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="hiva.PicOfAlbums")]
+	public partial class PicOfAlbum : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
 		
-		private int _ID;
+		private int _Id;
 		
-		private string _DateOfPayment;
+		private System.Nullable<int> _AlbumId;
 		
-		private System.Nullable<System.DateTime> _DateofEntry;
+		private System.Nullable<System.DateTime> _CreateDate;
 		
-		private string _Fee;
+		private System.Nullable<System.Guid> _CreatorId;
 		
-		private System.Nullable<System.Guid> _MemberID;
+		private string _Desc;
 		
-		private string _SourceBank;
+		private System.Nullable<bool> _State;
 		
-		private string _DestinationBank;
-		
-		private string _ReceiptID;
-		
-		private System.Nullable<int> _PaymentMethod;
+		private string _Path;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
     partial void OnCreated();
-    partial void OnIDChanging(int value);
-    partial void OnIDChanged();
-    partial void OnDateOfPaymentChanging(string value);
-    partial void OnDateOfPaymentChanged();
-    partial void OnDateofEntryChanging(System.Nullable<System.DateTime> value);
-    partial void OnDateofEntryChanged();
-    partial void OnFeeChanging(string value);
-    partial void OnFeeChanged();
-    partial void OnMemberIDChanging(System.Nullable<System.Guid> value);
-    partial void OnMemberIDChanged();
-    partial void OnSourceBankChanging(string value);
-    partial void OnSourceBankChanged();
-    partial void OnDestinationBankChanging(string value);
-    partial void OnDestinationBankChanged();
-    partial void OnReceiptIDChanging(string value);
-    partial void OnReceiptIDChanged();
-    partial void OnPaymentMethodChanging(System.Nullable<int> value);
-    partial void OnPaymentMethodChanged();
+    partial void OnIdChanging(int value);
+    partial void OnIdChanged();
+    partial void OnAlbumIdChanging(System.Nullable<int> value);
+    partial void OnAlbumIdChanged();
+    partial void OnCreateDateChanging(System.Nullable<System.DateTime> value);
+    partial void OnCreateDateChanged();
+    partial void OnCreatorIdChanging(System.Nullable<System.Guid> value);
+    partial void OnCreatorIdChanged();
+    partial void OnDescChanging(string value);
+    partial void OnDescChanged();
+    partial void OnStateChanging(System.Nullable<bool> value);
+    partial void OnStateChanged();
+    partial void OnPathChanging(string value);
+    partial void OnPathChanged();
     #endregion
 		
-		public Payment()
+		public PicOfAlbum()
 		{
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int ID
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int Id
 		{
 			get
 			{
-				return this._ID;
+				return this._Id;
 			}
 			set
 			{
-				if ((this._ID != value))
+				if ((this._Id != value))
 				{
-					this.OnIDChanging(value);
+					this.OnIdChanging(value);
 					this.SendPropertyChanging();
-					this._ID = value;
-					this.SendPropertyChanged("ID");
-					this.OnIDChanged();
+					this._Id = value;
+					this.SendPropertyChanged("Id");
+					this.OnIdChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DateOfPayment", DbType="NVarChar(MAX)")]
-		public string DateOfPayment
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AlbumId", DbType="Int")]
+		public System.Nullable<int> AlbumId
 		{
 			get
 			{
-				return this._DateOfPayment;
+				return this._AlbumId;
 			}
 			set
 			{
-				if ((this._DateOfPayment != value))
+				if ((this._AlbumId != value))
 				{
-					this.OnDateOfPaymentChanging(value);
+					this.OnAlbumIdChanging(value);
 					this.SendPropertyChanging();
-					this._DateOfPayment = value;
-					this.SendPropertyChanged("DateOfPayment");
-					this.OnDateOfPaymentChanged();
+					this._AlbumId = value;
+					this.SendPropertyChanged("AlbumId");
+					this.OnAlbumIdChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DateofEntry", DbType="DateTime")]
-		public System.Nullable<System.DateTime> DateofEntry
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CreateDate", DbType="DateTime")]
+		public System.Nullable<System.DateTime> CreateDate
 		{
 			get
 			{
-				return this._DateofEntry;
+				return this._CreateDate;
 			}
 			set
 			{
-				if ((this._DateofEntry != value))
+				if ((this._CreateDate != value))
 				{
-					this.OnDateofEntryChanging(value);
+					this.OnCreateDateChanging(value);
 					this.SendPropertyChanging();
-					this._DateofEntry = value;
-					this.SendPropertyChanged("DateofEntry");
-					this.OnDateofEntryChanged();
+					this._CreateDate = value;
+					this.SendPropertyChanged("CreateDate");
+					this.OnCreateDateChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Fee", DbType="NVarChar(50)")]
-		public string Fee
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CreatorId", DbType="UniqueIdentifier")]
+		public System.Nullable<System.Guid> CreatorId
 		{
 			get
 			{
-				return this._Fee;
+				return this._CreatorId;
 			}
 			set
 			{
-				if ((this._Fee != value))
+				if ((this._CreatorId != value))
 				{
-					this.OnFeeChanging(value);
+					this.OnCreatorIdChanging(value);
 					this.SendPropertyChanging();
-					this._Fee = value;
-					this.SendPropertyChanged("Fee");
-					this.OnFeeChanged();
+					this._CreatorId = value;
+					this.SendPropertyChanged("CreatorId");
+					this.OnCreatorIdChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MemberID", DbType="UniqueIdentifier")]
-		public System.Nullable<System.Guid> MemberID
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[Desc]", Storage="_Desc", DbType="NVarChar(MAX)")]
+		public string Desc
 		{
 			get
 			{
-				return this._MemberID;
+				return this._Desc;
 			}
 			set
 			{
-				if ((this._MemberID != value))
+				if ((this._Desc != value))
 				{
-					this.OnMemberIDChanging(value);
+					this.OnDescChanging(value);
 					this.SendPropertyChanging();
-					this._MemberID = value;
-					this.SendPropertyChanged("MemberID");
-					this.OnMemberIDChanged();
+					this._Desc = value;
+					this.SendPropertyChanged("Desc");
+					this.OnDescChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SourceBank", DbType="NVarChar(50)")]
-		public string SourceBank
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_State", DbType="Bit")]
+		public System.Nullable<bool> State
 		{
 			get
 			{
-				return this._SourceBank;
+				return this._State;
 			}
 			set
 			{
-				if ((this._SourceBank != value))
+				if ((this._State != value))
 				{
-					this.OnSourceBankChanging(value);
+					this.OnStateChanging(value);
 					this.SendPropertyChanging();
-					this._SourceBank = value;
-					this.SendPropertyChanged("SourceBank");
-					this.OnSourceBankChanged();
+					this._State = value;
+					this.SendPropertyChanged("State");
+					this.OnStateChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DestinationBank", DbType="NVarChar(50)")]
-		public string DestinationBank
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Path", DbType="NVarChar(MAX)")]
+		public string Path
 		{
 			get
 			{
-				return this._DestinationBank;
+				return this._Path;
 			}
 			set
 			{
-				if ((this._DestinationBank != value))
+				if ((this._Path != value))
 				{
-					this.OnDestinationBankChanging(value);
+					this.OnPathChanging(value);
 					this.SendPropertyChanging();
-					this._DestinationBank = value;
-					this.SendPropertyChanged("DestinationBank");
-					this.OnDestinationBankChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ReceiptID", DbType="NVarChar(50)")]
-		public string ReceiptID
-		{
-			get
-			{
-				return this._ReceiptID;
-			}
-			set
-			{
-				if ((this._ReceiptID != value))
-				{
-					this.OnReceiptIDChanging(value);
-					this.SendPropertyChanging();
-					this._ReceiptID = value;
-					this.SendPropertyChanged("ReceiptID");
-					this.OnReceiptIDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PaymentMethod", DbType="Int")]
-		public System.Nullable<int> PaymentMethod
-		{
-			get
-			{
-				return this._PaymentMethod;
-			}
-			set
-			{
-				if ((this._PaymentMethod != value))
-				{
-					this.OnPaymentMethodChanging(value);
-					this.SendPropertyChanging();
-					this._PaymentMethod = value;
-					this.SendPropertyChanged("PaymentMethod");
-					this.OnPaymentMethodChanged();
+					this._Path = value;
+					this.SendPropertyChanged("Path");
+					this.OnPathChanged();
 				}
 			}
 		}
@@ -2846,8 +2809,6 @@ namespace TaavoniUT3SMSManager.Model
 		
 		private EntitySet<MemberSponserShip> _MemberSponserShips;
 		
-		private EntitySet<MembersProfile1> _MembersProfile1s;
-		
 		private EntitySet<MembersProfile> _MembersProfiles;
 		
 		private EntityRef<aspnet_Application> _aspnet_Application;
@@ -2885,7 +2846,6 @@ namespace TaavoniUT3SMSManager.Model
 			this._MembersEmployees = new EntitySet<MembersEmployee>(new Action<MembersEmployee>(this.attach_MembersEmployees), new Action<MembersEmployee>(this.detach_MembersEmployees));
 			this._MembersIsargaris = new EntitySet<MembersIsargari>(new Action<MembersIsargari>(this.attach_MembersIsargaris), new Action<MembersIsargari>(this.detach_MembersIsargaris));
 			this._MemberSponserShips = new EntitySet<MemberSponserShip>(new Action<MemberSponserShip>(this.attach_MemberSponserShips), new Action<MemberSponserShip>(this.detach_MemberSponserShips));
-			this._MembersProfile1s = new EntitySet<MembersProfile1>(new Action<MembersProfile1>(this.attach_MembersProfile1s), new Action<MembersProfile1>(this.detach_MembersProfile1s));
 			this._MembersProfiles = new EntitySet<MembersProfile>(new Action<MembersProfile>(this.attach_MembersProfiles), new Action<MembersProfile>(this.detach_MembersProfiles));
 			this._aspnet_Application = default(EntityRef<aspnet_Application>);
 			OnCreated();
@@ -3210,19 +3170,6 @@ namespace TaavoniUT3SMSManager.Model
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="aspnet_User_MembersProfile1", Storage="_MembersProfile1s", ThisKey="UserId", OtherKey="MemberID")]
-		public EntitySet<MembersProfile1> MembersProfile1s
-		{
-			get
-			{
-				return this._MembersProfile1s;
-			}
-			set
-			{
-				this._MembersProfile1s.Assign(value);
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="aspnet_User_MembersProfile", Storage="_MembersProfiles", ThisKey="UserId", OtherKey="MemberID")]
 		public EntitySet<MembersProfile> MembersProfiles
 		{
@@ -3393,18 +3340,6 @@ namespace TaavoniUT3SMSManager.Model
 		}
 		
 		private void detach_MemberSponserShips(MemberSponserShip entity)
-		{
-			this.SendPropertyChanging();
-			entity.aspnet_User = null;
-		}
-		
-		private void attach_MembersProfile1s(MembersProfile1 entity)
-		{
-			this.SendPropertyChanging();
-			entity.aspnet_User = this;
-		}
-		
-		private void detach_MembersProfile1s(MembersProfile1 entity)
 		{
 			this.SendPropertyChanging();
 			entity.aspnet_User = null;
@@ -3999,8 +3934,6 @@ namespace TaavoniUT3SMSManager.Model
 		
 		private string _CityName;
 		
-		private EntitySet<MembersProfile1> _MembersProfile1s;
-		
 		private EntitySet<MembersProfile> _MembersProfiles;
 		
     #region Extensibility Method Definitions
@@ -4015,7 +3948,6 @@ namespace TaavoniUT3SMSManager.Model
 		
 		public City()
 		{
-			this._MembersProfile1s = new EntitySet<MembersProfile1>(new Action<MembersProfile1>(this.attach_MembersProfile1s), new Action<MembersProfile1>(this.detach_MembersProfile1s));
 			this._MembersProfiles = new EntitySet<MembersProfile>(new Action<MembersProfile>(this.attach_MembersProfiles), new Action<MembersProfile>(this.detach_MembersProfiles));
 			OnCreated();
 		}
@@ -4060,19 +3992,6 @@ namespace TaavoniUT3SMSManager.Model
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="City_MembersProfile1", Storage="_MembersProfile1s", ThisKey="CityId", OtherKey="CityID")]
-		public EntitySet<MembersProfile1> MembersProfile1s
-		{
-			get
-			{
-				return this._MembersProfile1s;
-			}
-			set
-			{
-				this._MembersProfile1s.Assign(value);
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="City_MembersProfile", Storage="_MembersProfiles", ThisKey="CityId", OtherKey="CityID")]
 		public EntitySet<MembersProfile> MembersProfiles
 		{
@@ -4106,18 +4025,6 @@ namespace TaavoniUT3SMSManager.Model
 			}
 		}
 		
-		private void attach_MembersProfile1s(MembersProfile1 entity)
-		{
-			this.SendPropertyChanging();
-			entity.City = this;
-		}
-		
-		private void detach_MembersProfile1s(MembersProfile1 entity)
-		{
-			this.SendPropertyChanging();
-			entity.City = null;
-		}
-		
 		private void attach_MembersProfiles(MembersProfile entity)
 		{
 			this.SendPropertyChanging();
@@ -4141,8 +4048,6 @@ namespace TaavoniUT3SMSManager.Model
 		
 		private string _DegreeValue;
 		
-		private EntitySet<MembersProfile1> _MembersProfile1s;
-		
 		private EntitySet<MembersProfile> _MembersProfiles;
 		
     #region Extensibility Method Definitions
@@ -4157,7 +4062,6 @@ namespace TaavoniUT3SMSManager.Model
 		
 		public Degree()
 		{
-			this._MembersProfile1s = new EntitySet<MembersProfile1>(new Action<MembersProfile1>(this.attach_MembersProfile1s), new Action<MembersProfile1>(this.detach_MembersProfile1s));
 			this._MembersProfiles = new EntitySet<MembersProfile>(new Action<MembersProfile>(this.attach_MembersProfiles), new Action<MembersProfile>(this.detach_MembersProfiles));
 			OnCreated();
 		}
@@ -4202,19 +4106,6 @@ namespace TaavoniUT3SMSManager.Model
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Degree_MembersProfile1", Storage="_MembersProfile1s", ThisKey="DegreeId", OtherKey="DegreeID")]
-		public EntitySet<MembersProfile1> MembersProfile1s
-		{
-			get
-			{
-				return this._MembersProfile1s;
-			}
-			set
-			{
-				this._MembersProfile1s.Assign(value);
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Degree_MembersProfile", Storage="_MembersProfiles", ThisKey="DegreeId", OtherKey="DegreeID")]
 		public EntitySet<MembersProfile> MembersProfiles
 		{
@@ -4246,18 +4137,6 @@ namespace TaavoniUT3SMSManager.Model
 			{
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
-		}
-		
-		private void attach_MembersProfile1s(MembersProfile1 entity)
-		{
-			this.SendPropertyChanging();
-			entity.Degree = this;
-		}
-		
-		private void detach_MembersProfile1s(MembersProfile1 entity)
-		{
-			this.SendPropertyChanging();
-			entity.Degree = null;
 		}
 		
 		private void attach_MembersProfiles(MembersProfile entity)
@@ -6384,6 +6263,599 @@ namespace TaavoniUT3SMSManager.Model
 		}
 	}
 	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.MembersProfile")]
+	public partial class MembersProfile : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _ID;
+		
+		private string _FirstName;
+		
+		private string _LastName;
+		
+		private System.Nullable<bool> _Gender;
+		
+		private System.Nullable<int> _CityID;
+		
+		private System.Nullable<int> _DegreeID;
+		
+		private string _InternationalCode;
+		
+		private string _IDCard;
+		
+		private string _IDCardPlace;
+		
+		private string _PersonalNumber;
+		
+		private string _BirthDate;
+		
+		private System.Nullable<System.Guid> _MemberID;
+		
+		private string _CreateDate;
+		
+		private System.Nullable<bool> _IsDisabled;
+		
+		private System.Nullable<double> _Point;
+		
+		private System.Nullable<int> _Rank;
+		
+		private System.Nullable<double> _Payment;
+		
+		private string _DocumentCode;
+		
+		private EntityRef<aspnet_User> _aspnet_User;
+		
+		private EntityRef<City> _City;
+		
+		private EntityRef<Degree> _Degree;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIDChanging(int value);
+    partial void OnIDChanged();
+    partial void OnFirstNameChanging(string value);
+    partial void OnFirstNameChanged();
+    partial void OnLastNameChanging(string value);
+    partial void OnLastNameChanged();
+    partial void OnGenderChanging(System.Nullable<bool> value);
+    partial void OnGenderChanged();
+    partial void OnCityIDChanging(System.Nullable<int> value);
+    partial void OnCityIDChanged();
+    partial void OnDegreeIDChanging(System.Nullable<int> value);
+    partial void OnDegreeIDChanged();
+    partial void OnInternationalCodeChanging(string value);
+    partial void OnInternationalCodeChanged();
+    partial void OnIDCardChanging(string value);
+    partial void OnIDCardChanged();
+    partial void OnIDCardPlaceChanging(string value);
+    partial void OnIDCardPlaceChanged();
+    partial void OnPersonalNumberChanging(string value);
+    partial void OnPersonalNumberChanged();
+    partial void OnBirthDateChanging(string value);
+    partial void OnBirthDateChanged();
+    partial void OnMemberIDChanging(System.Nullable<System.Guid> value);
+    partial void OnMemberIDChanged();
+    partial void OnCreateDateChanging(string value);
+    partial void OnCreateDateChanged();
+    partial void OnIsDisabledChanging(System.Nullable<bool> value);
+    partial void OnIsDisabledChanged();
+    partial void OnPointChanging(System.Nullable<double> value);
+    partial void OnPointChanged();
+    partial void OnRankChanging(System.Nullable<int> value);
+    partial void OnRankChanged();
+    partial void OnPaymentChanging(System.Nullable<double> value);
+    partial void OnPaymentChanged();
+    partial void OnDocumentCodeChanging(string value);
+    partial void OnDocumentCodeChanged();
+    #endregion
+		
+		public MembersProfile()
+		{
+			this._aspnet_User = default(EntityRef<aspnet_User>);
+			this._City = default(EntityRef<City>);
+			this._Degree = default(EntityRef<Degree>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int ID
+		{
+			get
+			{
+				return this._ID;
+			}
+			set
+			{
+				if ((this._ID != value))
+				{
+					this.OnIDChanging(value);
+					this.SendPropertyChanging();
+					this._ID = value;
+					this.SendPropertyChanged("ID");
+					this.OnIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FirstName", DbType="NVarChar(50)")]
+		public string FirstName
+		{
+			get
+			{
+				return this._FirstName;
+			}
+			set
+			{
+				if ((this._FirstName != value))
+				{
+					this.OnFirstNameChanging(value);
+					this.SendPropertyChanging();
+					this._FirstName = value;
+					this.SendPropertyChanged("FirstName");
+					this.OnFirstNameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_LastName", DbType="NVarChar(50)")]
+		public string LastName
+		{
+			get
+			{
+				return this._LastName;
+			}
+			set
+			{
+				if ((this._LastName != value))
+				{
+					this.OnLastNameChanging(value);
+					this.SendPropertyChanging();
+					this._LastName = value;
+					this.SendPropertyChanged("LastName");
+					this.OnLastNameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Gender", DbType="Bit")]
+		public System.Nullable<bool> Gender
+		{
+			get
+			{
+				return this._Gender;
+			}
+			set
+			{
+				if ((this._Gender != value))
+				{
+					this.OnGenderChanging(value);
+					this.SendPropertyChanging();
+					this._Gender = value;
+					this.SendPropertyChanged("Gender");
+					this.OnGenderChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CityID", DbType="Int")]
+		public System.Nullable<int> CityID
+		{
+			get
+			{
+				return this._CityID;
+			}
+			set
+			{
+				if ((this._CityID != value))
+				{
+					if (this._City.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnCityIDChanging(value);
+					this.SendPropertyChanging();
+					this._CityID = value;
+					this.SendPropertyChanged("CityID");
+					this.OnCityIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DegreeID", DbType="Int")]
+		public System.Nullable<int> DegreeID
+		{
+			get
+			{
+				return this._DegreeID;
+			}
+			set
+			{
+				if ((this._DegreeID != value))
+				{
+					if (this._Degree.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnDegreeIDChanging(value);
+					this.SendPropertyChanging();
+					this._DegreeID = value;
+					this.SendPropertyChanged("DegreeID");
+					this.OnDegreeIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_InternationalCode", DbType="NVarChar(50)")]
+		public string InternationalCode
+		{
+			get
+			{
+				return this._InternationalCode;
+			}
+			set
+			{
+				if ((this._InternationalCode != value))
+				{
+					this.OnInternationalCodeChanging(value);
+					this.SendPropertyChanging();
+					this._InternationalCode = value;
+					this.SendPropertyChanged("InternationalCode");
+					this.OnInternationalCodeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IDCard", DbType="NVarChar(50)")]
+		public string IDCard
+		{
+			get
+			{
+				return this._IDCard;
+			}
+			set
+			{
+				if ((this._IDCard != value))
+				{
+					this.OnIDCardChanging(value);
+					this.SendPropertyChanging();
+					this._IDCard = value;
+					this.SendPropertyChanged("IDCard");
+					this.OnIDCardChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IDCardPlace", DbType="NVarChar(50)")]
+		public string IDCardPlace
+		{
+			get
+			{
+				return this._IDCardPlace;
+			}
+			set
+			{
+				if ((this._IDCardPlace != value))
+				{
+					this.OnIDCardPlaceChanging(value);
+					this.SendPropertyChanging();
+					this._IDCardPlace = value;
+					this.SendPropertyChanged("IDCardPlace");
+					this.OnIDCardPlaceChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PersonalNumber", DbType="NVarChar(50)")]
+		public string PersonalNumber
+		{
+			get
+			{
+				return this._PersonalNumber;
+			}
+			set
+			{
+				if ((this._PersonalNumber != value))
+				{
+					this.OnPersonalNumberChanging(value);
+					this.SendPropertyChanging();
+					this._PersonalNumber = value;
+					this.SendPropertyChanged("PersonalNumber");
+					this.OnPersonalNumberChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_BirthDate", DbType="NVarChar(50)")]
+		public string BirthDate
+		{
+			get
+			{
+				return this._BirthDate;
+			}
+			set
+			{
+				if ((this._BirthDate != value))
+				{
+					this.OnBirthDateChanging(value);
+					this.SendPropertyChanging();
+					this._BirthDate = value;
+					this.SendPropertyChanged("BirthDate");
+					this.OnBirthDateChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MemberID", DbType="UniqueIdentifier")]
+		public System.Nullable<System.Guid> MemberID
+		{
+			get
+			{
+				return this._MemberID;
+			}
+			set
+			{
+				if ((this._MemberID != value))
+				{
+					if (this._aspnet_User.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnMemberIDChanging(value);
+					this.SendPropertyChanging();
+					this._MemberID = value;
+					this.SendPropertyChanged("MemberID");
+					this.OnMemberIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CreateDate", DbType="NVarChar(50)")]
+		public string CreateDate
+		{
+			get
+			{
+				return this._CreateDate;
+			}
+			set
+			{
+				if ((this._CreateDate != value))
+				{
+					this.OnCreateDateChanging(value);
+					this.SendPropertyChanging();
+					this._CreateDate = value;
+					this.SendPropertyChanged("CreateDate");
+					this.OnCreateDateChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IsDisabled", DbType="Bit")]
+		public System.Nullable<bool> IsDisabled
+		{
+			get
+			{
+				return this._IsDisabled;
+			}
+			set
+			{
+				if ((this._IsDisabled != value))
+				{
+					this.OnIsDisabledChanging(value);
+					this.SendPropertyChanging();
+					this._IsDisabled = value;
+					this.SendPropertyChanged("IsDisabled");
+					this.OnIsDisabledChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Point", DbType="Float")]
+		public System.Nullable<double> Point
+		{
+			get
+			{
+				return this._Point;
+			}
+			set
+			{
+				if ((this._Point != value))
+				{
+					this.OnPointChanging(value);
+					this.SendPropertyChanging();
+					this._Point = value;
+					this.SendPropertyChanged("Point");
+					this.OnPointChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Rank", DbType="Int")]
+		public System.Nullable<int> Rank
+		{
+			get
+			{
+				return this._Rank;
+			}
+			set
+			{
+				if ((this._Rank != value))
+				{
+					this.OnRankChanging(value);
+					this.SendPropertyChanging();
+					this._Rank = value;
+					this.SendPropertyChanged("Rank");
+					this.OnRankChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Payment", DbType="Float")]
+		public System.Nullable<double> Payment
+		{
+			get
+			{
+				return this._Payment;
+			}
+			set
+			{
+				if ((this._Payment != value))
+				{
+					this.OnPaymentChanging(value);
+					this.SendPropertyChanging();
+					this._Payment = value;
+					this.SendPropertyChanged("Payment");
+					this.OnPaymentChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DocumentCode", DbType="NVarChar(50)")]
+		public string DocumentCode
+		{
+			get
+			{
+				return this._DocumentCode;
+			}
+			set
+			{
+				if ((this._DocumentCode != value))
+				{
+					this.OnDocumentCodeChanging(value);
+					this.SendPropertyChanging();
+					this._DocumentCode = value;
+					this.SendPropertyChanged("DocumentCode");
+					this.OnDocumentCodeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="aspnet_User_MembersProfile", Storage="_aspnet_User", ThisKey="MemberID", OtherKey="UserId", IsForeignKey=true)]
+		public aspnet_User aspnet_User
+		{
+			get
+			{
+				return this._aspnet_User.Entity;
+			}
+			set
+			{
+				aspnet_User previousValue = this._aspnet_User.Entity;
+				if (((previousValue != value) 
+							|| (this._aspnet_User.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._aspnet_User.Entity = null;
+						previousValue.MembersProfiles.Remove(this);
+					}
+					this._aspnet_User.Entity = value;
+					if ((value != null))
+					{
+						value.MembersProfiles.Add(this);
+						this._MemberID = value.UserId;
+					}
+					else
+					{
+						this._MemberID = default(Nullable<System.Guid>);
+					}
+					this.SendPropertyChanged("aspnet_User");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="City_MembersProfile", Storage="_City", ThisKey="CityID", OtherKey="CityId", IsForeignKey=true)]
+		public City City
+		{
+			get
+			{
+				return this._City.Entity;
+			}
+			set
+			{
+				City previousValue = this._City.Entity;
+				if (((previousValue != value) 
+							|| (this._City.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._City.Entity = null;
+						previousValue.MembersProfiles.Remove(this);
+					}
+					this._City.Entity = value;
+					if ((value != null))
+					{
+						value.MembersProfiles.Add(this);
+						this._CityID = value.CityId;
+					}
+					else
+					{
+						this._CityID = default(Nullable<int>);
+					}
+					this.SendPropertyChanged("City");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Degree_MembersProfile", Storage="_Degree", ThisKey="DegreeID", OtherKey="DegreeId", IsForeignKey=true)]
+		public Degree Degree
+		{
+			get
+			{
+				return this._Degree.Entity;
+			}
+			set
+			{
+				Degree previousValue = this._Degree.Entity;
+				if (((previousValue != value) 
+							|| (this._Degree.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Degree.Entity = null;
+						previousValue.MembersProfiles.Remove(this);
+					}
+					this._Degree.Entity = value;
+					if ((value != null))
+					{
+						value.MembersProfiles.Add(this);
+						this._DegreeID = value.DegreeId;
+					}
+					else
+					{
+						this._DegreeID = default(Nullable<int>);
+					}
+					this.SendPropertyChanged("Degree");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.MembersRelations")]
 	public partial class MembersRelation : INotifyPropertyChanging, INotifyPropertyChanged
 	{
@@ -6710,49 +7182,29 @@ namespace TaavoniUT3SMSManager.Model
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.MembersProfile")]
-	public partial class MembersProfile1 : INotifyPropertyChanging, INotifyPropertyChanged
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Payment")]
+	public partial class Payment : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
 		
 		private int _ID;
 		
-		private string _FirstName;
+		private string _DateOfPayment;
 		
-		private string _LastName;
+		private System.Nullable<System.DateTime> _DateofEntry;
 		
-		private System.Nullable<bool> _Gender;
-		
-		private System.Nullable<int> _CityID;
-		
-		private System.Nullable<int> _DegreeID;
-		
-		private string _InternationalCode;
-		
-		private string _IDCard;
-		
-		private string _IDCardPlace;
-		
-		private string _PersonalNumber;
-		
-		private string _BirthDate;
+		private string _Fee;
 		
 		private System.Nullable<System.Guid> _MemberID;
 		
-		private string _CreateDate;
+		private string _SourceBank;
 		
-		private System.Nullable<bool> _IsDisabled;
+		private string _DestinationBank;
 		
-		private string _Point;
+		private string _ReceiptID;
 		
-		private string _Rank;
-		
-		private EntityRef<aspnet_User> _aspnet_User;
-		
-		private EntityRef<City> _City;
-		
-		private EntityRef<Degree> _Degree;
+		private System.Nullable<int> _PaymentMethod;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -6760,43 +7212,26 @@ namespace TaavoniUT3SMSManager.Model
     partial void OnCreated();
     partial void OnIDChanging(int value);
     partial void OnIDChanged();
-    partial void OnFirstNameChanging(string value);
-    partial void OnFirstNameChanged();
-    partial void OnLastNameChanging(string value);
-    partial void OnLastNameChanged();
-    partial void OnGenderChanging(System.Nullable<bool> value);
-    partial void OnGenderChanged();
-    partial void OnCityIDChanging(System.Nullable<int> value);
-    partial void OnCityIDChanged();
-    partial void OnDegreeIDChanging(System.Nullable<int> value);
-    partial void OnDegreeIDChanged();
-    partial void OnInternationalCodeChanging(string value);
-    partial void OnInternationalCodeChanged();
-    partial void OnIDCardChanging(string value);
-    partial void OnIDCardChanged();
-    partial void OnIDCardPlaceChanging(string value);
-    partial void OnIDCardPlaceChanged();
-    partial void OnPersonalNumberChanging(string value);
-    partial void OnPersonalNumberChanged();
-    partial void OnBirthDateChanging(string value);
-    partial void OnBirthDateChanged();
+    partial void OnDateOfPaymentChanging(string value);
+    partial void OnDateOfPaymentChanged();
+    partial void OnDateofEntryChanging(System.Nullable<System.DateTime> value);
+    partial void OnDateofEntryChanged();
+    partial void OnFeeChanging(string value);
+    partial void OnFeeChanged();
     partial void OnMemberIDChanging(System.Nullable<System.Guid> value);
     partial void OnMemberIDChanged();
-    partial void OnCreateDateChanging(string value);
-    partial void OnCreateDateChanged();
-    partial void OnIsDisabledChanging(System.Nullable<bool> value);
-    partial void OnIsDisabledChanged();
-    partial void OnPointChanging(string value);
-    partial void OnPointChanged();
-    partial void OnRankChanging(string value);
-    partial void OnRankChanged();
+    partial void OnSourceBankChanging(string value);
+    partial void OnSourceBankChanged();
+    partial void OnDestinationBankChanging(string value);
+    partial void OnDestinationBankChanged();
+    partial void OnReceiptIDChanging(string value);
+    partial void OnReceiptIDChanged();
+    partial void OnPaymentMethodChanging(System.Nullable<int> value);
+    partial void OnPaymentMethodChanged();
     #endregion
 		
-		public MembersProfile1()
+		public Payment()
 		{
-			this._aspnet_User = default(EntityRef<aspnet_User>);
-			this._City = default(EntityRef<City>);
-			this._Degree = default(EntityRef<Degree>);
 			OnCreated();
 		}
 		
@@ -6820,210 +7255,62 @@ namespace TaavoniUT3SMSManager.Model
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FirstName", DbType="NVarChar(50)")]
-		public string FirstName
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DateOfPayment", DbType="NVarChar(MAX)")]
+		public string DateOfPayment
 		{
 			get
 			{
-				return this._FirstName;
+				return this._DateOfPayment;
 			}
 			set
 			{
-				if ((this._FirstName != value))
+				if ((this._DateOfPayment != value))
 				{
-					this.OnFirstNameChanging(value);
+					this.OnDateOfPaymentChanging(value);
 					this.SendPropertyChanging();
-					this._FirstName = value;
-					this.SendPropertyChanged("FirstName");
-					this.OnFirstNameChanged();
+					this._DateOfPayment = value;
+					this.SendPropertyChanged("DateOfPayment");
+					this.OnDateOfPaymentChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_LastName", DbType="NVarChar(50)")]
-		public string LastName
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DateofEntry", DbType="DateTime")]
+		public System.Nullable<System.DateTime> DateofEntry
 		{
 			get
 			{
-				return this._LastName;
+				return this._DateofEntry;
 			}
 			set
 			{
-				if ((this._LastName != value))
+				if ((this._DateofEntry != value))
 				{
-					this.OnLastNameChanging(value);
+					this.OnDateofEntryChanging(value);
 					this.SendPropertyChanging();
-					this._LastName = value;
-					this.SendPropertyChanged("LastName");
-					this.OnLastNameChanged();
+					this._DateofEntry = value;
+					this.SendPropertyChanged("DateofEntry");
+					this.OnDateofEntryChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Gender", DbType="Bit")]
-		public System.Nullable<bool> Gender
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Fee", DbType="NVarChar(50)")]
+		public string Fee
 		{
 			get
 			{
-				return this._Gender;
+				return this._Fee;
 			}
 			set
 			{
-				if ((this._Gender != value))
+				if ((this._Fee != value))
 				{
-					this.OnGenderChanging(value);
+					this.OnFeeChanging(value);
 					this.SendPropertyChanging();
-					this._Gender = value;
-					this.SendPropertyChanged("Gender");
-					this.OnGenderChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CityID", DbType="Int")]
-		public System.Nullable<int> CityID
-		{
-			get
-			{
-				return this._CityID;
-			}
-			set
-			{
-				if ((this._CityID != value))
-				{
-					if (this._City.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnCityIDChanging(value);
-					this.SendPropertyChanging();
-					this._CityID = value;
-					this.SendPropertyChanged("CityID");
-					this.OnCityIDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DegreeID", DbType="Int")]
-		public System.Nullable<int> DegreeID
-		{
-			get
-			{
-				return this._DegreeID;
-			}
-			set
-			{
-				if ((this._DegreeID != value))
-				{
-					if (this._Degree.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnDegreeIDChanging(value);
-					this.SendPropertyChanging();
-					this._DegreeID = value;
-					this.SendPropertyChanged("DegreeID");
-					this.OnDegreeIDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_InternationalCode", DbType="NVarChar(50)")]
-		public string InternationalCode
-		{
-			get
-			{
-				return this._InternationalCode;
-			}
-			set
-			{
-				if ((this._InternationalCode != value))
-				{
-					this.OnInternationalCodeChanging(value);
-					this.SendPropertyChanging();
-					this._InternationalCode = value;
-					this.SendPropertyChanged("InternationalCode");
-					this.OnInternationalCodeChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IDCard", DbType="NVarChar(50)")]
-		public string IDCard
-		{
-			get
-			{
-				return this._IDCard;
-			}
-			set
-			{
-				if ((this._IDCard != value))
-				{
-					this.OnIDCardChanging(value);
-					this.SendPropertyChanging();
-					this._IDCard = value;
-					this.SendPropertyChanged("IDCard");
-					this.OnIDCardChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IDCardPlace", DbType="NVarChar(50)")]
-		public string IDCardPlace
-		{
-			get
-			{
-				return this._IDCardPlace;
-			}
-			set
-			{
-				if ((this._IDCardPlace != value))
-				{
-					this.OnIDCardPlaceChanging(value);
-					this.SendPropertyChanging();
-					this._IDCardPlace = value;
-					this.SendPropertyChanged("IDCardPlace");
-					this.OnIDCardPlaceChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PersonalNumber", DbType="NVarChar(50)")]
-		public string PersonalNumber
-		{
-			get
-			{
-				return this._PersonalNumber;
-			}
-			set
-			{
-				if ((this._PersonalNumber != value))
-				{
-					this.OnPersonalNumberChanging(value);
-					this.SendPropertyChanging();
-					this._PersonalNumber = value;
-					this.SendPropertyChanged("PersonalNumber");
-					this.OnPersonalNumberChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_BirthDate", DbType="NVarChar(50)")]
-		public string BirthDate
-		{
-			get
-			{
-				return this._BirthDate;
-			}
-			set
-			{
-				if ((this._BirthDate != value))
-				{
-					this.OnBirthDateChanging(value);
-					this.SendPropertyChanging();
-					this._BirthDate = value;
-					this.SendPropertyChanged("BirthDate");
-					this.OnBirthDateChanged();
+					this._Fee = value;
+					this.SendPropertyChanged("Fee");
+					this.OnFeeChanged();
 				}
 			}
 		}
@@ -7039,10 +7326,6 @@ namespace TaavoniUT3SMSManager.Model
 			{
 				if ((this._MemberID != value))
 				{
-					if (this._aspnet_User.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
 					this.OnMemberIDChanging(value);
 					this.SendPropertyChanging();
 					this._MemberID = value;
@@ -7052,184 +7335,82 @@ namespace TaavoniUT3SMSManager.Model
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CreateDate", DbType="NVarChar(50)")]
-		public string CreateDate
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SourceBank", DbType="NVarChar(50)")]
+		public string SourceBank
 		{
 			get
 			{
-				return this._CreateDate;
+				return this._SourceBank;
 			}
 			set
 			{
-				if ((this._CreateDate != value))
+				if ((this._SourceBank != value))
 				{
-					this.OnCreateDateChanging(value);
+					this.OnSourceBankChanging(value);
 					this.SendPropertyChanging();
-					this._CreateDate = value;
-					this.SendPropertyChanged("CreateDate");
-					this.OnCreateDateChanged();
+					this._SourceBank = value;
+					this.SendPropertyChanged("SourceBank");
+					this.OnSourceBankChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IsDisabled", DbType="Bit")]
-		public System.Nullable<bool> IsDisabled
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DestinationBank", DbType="NVarChar(50)")]
+		public string DestinationBank
 		{
 			get
 			{
-				return this._IsDisabled;
+				return this._DestinationBank;
 			}
 			set
 			{
-				if ((this._IsDisabled != value))
+				if ((this._DestinationBank != value))
 				{
-					this.OnIsDisabledChanging(value);
+					this.OnDestinationBankChanging(value);
 					this.SendPropertyChanging();
-					this._IsDisabled = value;
-					this.SendPropertyChanged("IsDisabled");
-					this.OnIsDisabledChanged();
+					this._DestinationBank = value;
+					this.SendPropertyChanged("DestinationBank");
+					this.OnDestinationBankChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Point", DbType="NVarChar(50)")]
-		public string Point
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ReceiptID", DbType="NVarChar(50)")]
+		public string ReceiptID
 		{
 			get
 			{
-				return this._Point;
+				return this._ReceiptID;
 			}
 			set
 			{
-				if ((this._Point != value))
+				if ((this._ReceiptID != value))
 				{
-					this.OnPointChanging(value);
+					this.OnReceiptIDChanging(value);
 					this.SendPropertyChanging();
-					this._Point = value;
-					this.SendPropertyChanged("Point");
-					this.OnPointChanged();
+					this._ReceiptID = value;
+					this.SendPropertyChanged("ReceiptID");
+					this.OnReceiptIDChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Rank", DbType="NVarChar(50)")]
-		public string Rank
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PaymentMethod", DbType="Int")]
+		public System.Nullable<int> PaymentMethod
 		{
 			get
 			{
-				return this._Rank;
+				return this._PaymentMethod;
 			}
 			set
 			{
-				if ((this._Rank != value))
+				if ((this._PaymentMethod != value))
 				{
-					this.OnRankChanging(value);
+					this.OnPaymentMethodChanging(value);
 					this.SendPropertyChanging();
-					this._Rank = value;
-					this.SendPropertyChanged("Rank");
-					this.OnRankChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="aspnet_User_MembersProfile1", Storage="_aspnet_User", ThisKey="MemberID", OtherKey="UserId", IsForeignKey=true)]
-		public aspnet_User aspnet_User
-		{
-			get
-			{
-				return this._aspnet_User.Entity;
-			}
-			set
-			{
-				aspnet_User previousValue = this._aspnet_User.Entity;
-				if (((previousValue != value) 
-							|| (this._aspnet_User.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._aspnet_User.Entity = null;
-						previousValue.MembersProfile1s.Remove(this);
-					}
-					this._aspnet_User.Entity = value;
-					if ((value != null))
-					{
-						value.MembersProfile1s.Add(this);
-						this._MemberID = value.UserId;
-					}
-					else
-					{
-						this._MemberID = default(Nullable<System.Guid>);
-					}
-					this.SendPropertyChanged("aspnet_User");
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="City_MembersProfile1", Storage="_City", ThisKey="CityID", OtherKey="CityId", IsForeignKey=true)]
-		public City City
-		{
-			get
-			{
-				return this._City.Entity;
-			}
-			set
-			{
-				City previousValue = this._City.Entity;
-				if (((previousValue != value) 
-							|| (this._City.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._City.Entity = null;
-						previousValue.MembersProfile1s.Remove(this);
-					}
-					this._City.Entity = value;
-					if ((value != null))
-					{
-						value.MembersProfile1s.Add(this);
-						this._CityID = value.CityId;
-					}
-					else
-					{
-						this._CityID = default(Nullable<int>);
-					}
-					this.SendPropertyChanged("City");
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Degree_MembersProfile1", Storage="_Degree", ThisKey="DegreeID", OtherKey="DegreeId", IsForeignKey=true)]
-		public Degree Degree
-		{
-			get
-			{
-				return this._Degree.Entity;
-			}
-			set
-			{
-				Degree previousValue = this._Degree.Entity;
-				if (((previousValue != value) 
-							|| (this._Degree.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Degree.Entity = null;
-						previousValue.MembersProfile1s.Remove(this);
-					}
-					this._Degree.Entity = value;
-					if ((value != null))
-					{
-						value.MembersProfile1s.Add(this);
-						this._DegreeID = value.DegreeId;
-					}
-					else
-					{
-						this._DegreeID = default(Nullable<int>);
-					}
-					this.SendPropertyChanged("Degree");
+					this._PaymentMethod = value;
+					this.SendPropertyChanged("PaymentMethod");
+					this.OnPaymentMethodChanged();
 				}
 			}
 		}
@@ -7255,350 +7436,93 @@ namespace TaavoniUT3SMSManager.Model
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.MembersProfile")]
-	public partial class MembersProfile : INotifyPropertyChanging, INotifyPropertyChanged
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="hiva.Album")]
+	public partial class Album : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
 		
-		private int _ID;
+		private int _Id;
 		
-		private string _FirstName;
+		private string _Name;
 		
-		private string _LastName;
+		private System.Nullable<System.DateTime> _CreateDate;
 		
-		private System.Nullable<bool> _Gender;
+		private System.Nullable<System.Guid> _CreatorId;
 		
-		private System.Nullable<int> _CityID;
+		private string _Explanation;
 		
-		private System.Nullable<int> _DegreeID;
+		private System.Nullable<bool> _State;
 		
-		private string _InternationalCode;
-		
-		private string _IDCard;
-		
-		private string _IDCardPlace;
-		
-		private string _PersonalNumber;
-		
-		private string _BirthDate;
-		
-		private System.Nullable<System.Guid> _MemberID;
-		
-		private string _CreateDate;
-		
-		private System.Nullable<bool> _IsDisabled;
-		
-		private string _Point;
-		
-		private string _Rank;
-		
-		private EntityRef<aspnet_User> _aspnet_User;
-		
-		private EntityRef<City> _City;
-		
-		private EntityRef<Degree> _Degree;
+		private string _ImageTitlePoster;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
     partial void OnCreated();
-    partial void OnIDChanging(int value);
-    partial void OnIDChanged();
-    partial void OnFirstNameChanging(string value);
-    partial void OnFirstNameChanged();
-    partial void OnLastNameChanging(string value);
-    partial void OnLastNameChanged();
-    partial void OnGenderChanging(System.Nullable<bool> value);
-    partial void OnGenderChanged();
-    partial void OnCityIDChanging(System.Nullable<int> value);
-    partial void OnCityIDChanged();
-    partial void OnDegreeIDChanging(System.Nullable<int> value);
-    partial void OnDegreeIDChanged();
-    partial void OnInternationalCodeChanging(string value);
-    partial void OnInternationalCodeChanged();
-    partial void OnIDCardChanging(string value);
-    partial void OnIDCardChanged();
-    partial void OnIDCardPlaceChanging(string value);
-    partial void OnIDCardPlaceChanged();
-    partial void OnPersonalNumberChanging(string value);
-    partial void OnPersonalNumberChanged();
-    partial void OnBirthDateChanging(string value);
-    partial void OnBirthDateChanged();
-    partial void OnMemberIDChanging(System.Nullable<System.Guid> value);
-    partial void OnMemberIDChanged();
-    partial void OnCreateDateChanging(string value);
+    partial void OnIdChanging(int value);
+    partial void OnIdChanged();
+    partial void OnNameChanging(string value);
+    partial void OnNameChanged();
+    partial void OnCreateDateChanging(System.Nullable<System.DateTime> value);
     partial void OnCreateDateChanged();
-    partial void OnIsDisabledChanging(System.Nullable<bool> value);
-    partial void OnIsDisabledChanged();
-    partial void OnPointChanging(string value);
-    partial void OnPointChanged();
-    partial void OnRankChanging(string value);
-    partial void OnRankChanged();
+    partial void OnCreatorIdChanging(System.Nullable<System.Guid> value);
+    partial void OnCreatorIdChanged();
+    partial void OnExplanationChanging(string value);
+    partial void OnExplanationChanged();
+    partial void OnStateChanging(System.Nullable<bool> value);
+    partial void OnStateChanged();
+    partial void OnImageTitlePosterChanging(string value);
+    partial void OnImageTitlePosterChanged();
     #endregion
 		
-		public MembersProfile()
+		public Album()
 		{
-			this._aspnet_User = default(EntityRef<aspnet_User>);
-			this._City = default(EntityRef<City>);
-			this._Degree = default(EntityRef<Degree>);
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int ID
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int Id
 		{
 			get
 			{
-				return this._ID;
+				return this._Id;
 			}
 			set
 			{
-				if ((this._ID != value))
+				if ((this._Id != value))
 				{
-					this.OnIDChanging(value);
+					this.OnIdChanging(value);
 					this.SendPropertyChanging();
-					this._ID = value;
-					this.SendPropertyChanged("ID");
-					this.OnIDChanged();
+					this._Id = value;
+					this.SendPropertyChanged("Id");
+					this.OnIdChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FirstName", DbType="NVarChar(50)")]
-		public string FirstName
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Name", DbType="NVarChar(50)")]
+		public string Name
 		{
 			get
 			{
-				return this._FirstName;
+				return this._Name;
 			}
 			set
 			{
-				if ((this._FirstName != value))
+				if ((this._Name != value))
 				{
-					this.OnFirstNameChanging(value);
+					this.OnNameChanging(value);
 					this.SendPropertyChanging();
-					this._FirstName = value;
-					this.SendPropertyChanged("FirstName");
-					this.OnFirstNameChanged();
+					this._Name = value;
+					this.SendPropertyChanged("Name");
+					this.OnNameChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_LastName", DbType="NVarChar(50)")]
-		public string LastName
-		{
-			get
-			{
-				return this._LastName;
-			}
-			set
-			{
-				if ((this._LastName != value))
-				{
-					this.OnLastNameChanging(value);
-					this.SendPropertyChanging();
-					this._LastName = value;
-					this.SendPropertyChanged("LastName");
-					this.OnLastNameChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Gender", DbType="Bit")]
-		public System.Nullable<bool> Gender
-		{
-			get
-			{
-				return this._Gender;
-			}
-			set
-			{
-				if ((this._Gender != value))
-				{
-					this.OnGenderChanging(value);
-					this.SendPropertyChanging();
-					this._Gender = value;
-					this.SendPropertyChanged("Gender");
-					this.OnGenderChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CityID", DbType="Int")]
-		public System.Nullable<int> CityID
-		{
-			get
-			{
-				return this._CityID;
-			}
-			set
-			{
-				if ((this._CityID != value))
-				{
-					if (this._City.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnCityIDChanging(value);
-					this.SendPropertyChanging();
-					this._CityID = value;
-					this.SendPropertyChanged("CityID");
-					this.OnCityIDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DegreeID", DbType="Int")]
-		public System.Nullable<int> DegreeID
-		{
-			get
-			{
-				return this._DegreeID;
-			}
-			set
-			{
-				if ((this._DegreeID != value))
-				{
-					if (this._Degree.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnDegreeIDChanging(value);
-					this.SendPropertyChanging();
-					this._DegreeID = value;
-					this.SendPropertyChanged("DegreeID");
-					this.OnDegreeIDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_InternationalCode", DbType="NVarChar(50)")]
-		public string InternationalCode
-		{
-			get
-			{
-				return this._InternationalCode;
-			}
-			set
-			{
-				if ((this._InternationalCode != value))
-				{
-					this.OnInternationalCodeChanging(value);
-					this.SendPropertyChanging();
-					this._InternationalCode = value;
-					this.SendPropertyChanged("InternationalCode");
-					this.OnInternationalCodeChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IDCard", DbType="NVarChar(50)")]
-		public string IDCard
-		{
-			get
-			{
-				return this._IDCard;
-			}
-			set
-			{
-				if ((this._IDCard != value))
-				{
-					this.OnIDCardChanging(value);
-					this.SendPropertyChanging();
-					this._IDCard = value;
-					this.SendPropertyChanged("IDCard");
-					this.OnIDCardChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IDCardPlace", DbType="NVarChar(50)")]
-		public string IDCardPlace
-		{
-			get
-			{
-				return this._IDCardPlace;
-			}
-			set
-			{
-				if ((this._IDCardPlace != value))
-				{
-					this.OnIDCardPlaceChanging(value);
-					this.SendPropertyChanging();
-					this._IDCardPlace = value;
-					this.SendPropertyChanged("IDCardPlace");
-					this.OnIDCardPlaceChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PersonalNumber", DbType="NVarChar(50)")]
-		public string PersonalNumber
-		{
-			get
-			{
-				return this._PersonalNumber;
-			}
-			set
-			{
-				if ((this._PersonalNumber != value))
-				{
-					this.OnPersonalNumberChanging(value);
-					this.SendPropertyChanging();
-					this._PersonalNumber = value;
-					this.SendPropertyChanged("PersonalNumber");
-					this.OnPersonalNumberChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_BirthDate", DbType="NVarChar(50)")]
-		public string BirthDate
-		{
-			get
-			{
-				return this._BirthDate;
-			}
-			set
-			{
-				if ((this._BirthDate != value))
-				{
-					this.OnBirthDateChanging(value);
-					this.SendPropertyChanging();
-					this._BirthDate = value;
-					this.SendPropertyChanged("BirthDate");
-					this.OnBirthDateChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MemberID", DbType="UniqueIdentifier")]
-		public System.Nullable<System.Guid> MemberID
-		{
-			get
-			{
-				return this._MemberID;
-			}
-			set
-			{
-				if ((this._MemberID != value))
-				{
-					if (this._aspnet_User.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnMemberIDChanging(value);
-					this.SendPropertyChanging();
-					this._MemberID = value;
-					this.SendPropertyChanged("MemberID");
-					this.OnMemberIDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CreateDate", DbType="NVarChar(50)")]
-		public string CreateDate
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CreateDate", DbType="DateTime")]
+		public System.Nullable<System.DateTime> CreateDate
 		{
 			get
 			{
@@ -7617,164 +7541,82 @@ namespace TaavoniUT3SMSManager.Model
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IsDisabled", DbType="Bit")]
-		public System.Nullable<bool> IsDisabled
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CreatorId", DbType="UniqueIdentifier")]
+		public System.Nullable<System.Guid> CreatorId
 		{
 			get
 			{
-				return this._IsDisabled;
+				return this._CreatorId;
 			}
 			set
 			{
-				if ((this._IsDisabled != value))
+				if ((this._CreatorId != value))
 				{
-					this.OnIsDisabledChanging(value);
+					this.OnCreatorIdChanging(value);
 					this.SendPropertyChanging();
-					this._IsDisabled = value;
-					this.SendPropertyChanged("IsDisabled");
-					this.OnIsDisabledChanged();
+					this._CreatorId = value;
+					this.SendPropertyChanged("CreatorId");
+					this.OnCreatorIdChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Point", DbType="NVarChar(50)")]
-		public string Point
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Explanation", DbType="NVarChar(MAX)")]
+		public string Explanation
 		{
 			get
 			{
-				return this._Point;
+				return this._Explanation;
 			}
 			set
 			{
-				if ((this._Point != value))
+				if ((this._Explanation != value))
 				{
-					this.OnPointChanging(value);
+					this.OnExplanationChanging(value);
 					this.SendPropertyChanging();
-					this._Point = value;
-					this.SendPropertyChanged("Point");
-					this.OnPointChanged();
+					this._Explanation = value;
+					this.SendPropertyChanged("Explanation");
+					this.OnExplanationChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Rank", DbType="NVarChar(50)")]
-		public string Rank
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_State", DbType="Bit")]
+		public System.Nullable<bool> State
 		{
 			get
 			{
-				return this._Rank;
+				return this._State;
 			}
 			set
 			{
-				if ((this._Rank != value))
+				if ((this._State != value))
 				{
-					this.OnRankChanging(value);
+					this.OnStateChanging(value);
 					this.SendPropertyChanging();
-					this._Rank = value;
-					this.SendPropertyChanged("Rank");
-					this.OnRankChanged();
+					this._State = value;
+					this.SendPropertyChanged("State");
+					this.OnStateChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="aspnet_User_MembersProfile", Storage="_aspnet_User", ThisKey="MemberID", OtherKey="UserId", IsForeignKey=true)]
-		public aspnet_User aspnet_User
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ImageTitlePoster", DbType="NVarChar(50)")]
+		public string ImageTitlePoster
 		{
 			get
 			{
-				return this._aspnet_User.Entity;
+				return this._ImageTitlePoster;
 			}
 			set
 			{
-				aspnet_User previousValue = this._aspnet_User.Entity;
-				if (((previousValue != value) 
-							|| (this._aspnet_User.HasLoadedOrAssignedValue == false)))
+				if ((this._ImageTitlePoster != value))
 				{
+					this.OnImageTitlePosterChanging(value);
 					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._aspnet_User.Entity = null;
-						previousValue.MembersProfiles.Remove(this);
-					}
-					this._aspnet_User.Entity = value;
-					if ((value != null))
-					{
-						value.MembersProfiles.Add(this);
-						this._MemberID = value.UserId;
-					}
-					else
-					{
-						this._MemberID = default(Nullable<System.Guid>);
-					}
-					this.SendPropertyChanged("aspnet_User");
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="City_MembersProfile", Storage="_City", ThisKey="CityID", OtherKey="CityId", IsForeignKey=true)]
-		public City City
-		{
-			get
-			{
-				return this._City.Entity;
-			}
-			set
-			{
-				City previousValue = this._City.Entity;
-				if (((previousValue != value) 
-							|| (this._City.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._City.Entity = null;
-						previousValue.MembersProfiles.Remove(this);
-					}
-					this._City.Entity = value;
-					if ((value != null))
-					{
-						value.MembersProfiles.Add(this);
-						this._CityID = value.CityId;
-					}
-					else
-					{
-						this._CityID = default(Nullable<int>);
-					}
-					this.SendPropertyChanged("City");
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Degree_MembersProfile", Storage="_Degree", ThisKey="DegreeID", OtherKey="DegreeId", IsForeignKey=true)]
-		public Degree Degree
-		{
-			get
-			{
-				return this._Degree.Entity;
-			}
-			set
-			{
-				Degree previousValue = this._Degree.Entity;
-				if (((previousValue != value) 
-							|| (this._Degree.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Degree.Entity = null;
-						previousValue.MembersProfiles.Remove(this);
-					}
-					this._Degree.Entity = value;
-					if ((value != null))
-					{
-						value.MembersProfiles.Add(this);
-						this._DegreeID = value.DegreeId;
-					}
-					else
-					{
-						this._DegreeID = default(Nullable<int>);
-					}
-					this.SendPropertyChanged("Degree");
+					this._ImageTitlePoster = value;
+					this.SendPropertyChanged("ImageTitlePoster");
+					this.OnImageTitlePosterChanged();
 				}
 			}
 		}

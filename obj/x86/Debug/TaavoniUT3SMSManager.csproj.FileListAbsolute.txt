@@ -10,3 +10,9 @@ D:\Projects\Taavoni\TaavoniUT3SMSManager\obj\x86\Debug\TaavoniUT3SMSManager.pdb
 D:\Projects\Taavoni\TaavoniUT3SMSManager\bin\Debug\TaavoniUT3SMSManager.exe
 D:\Projects\Taavoni\TaavoniUT3SMSManager\bin\Debug\TaavoniUT3SMSManager.pdb
 D:\Projects\Taavoni\TaavoniUT3SMSManager\obj\x86\Debug\TaavoniUT3SMSManager.csprojResolveAssemblyReference.cache
+D:\Projects\Taavoni\1394\TaavoniUT3SMSManager\bin\Debug\TaavoniUT3SMSManager.exe.config
+D:\Projects\Taavoni\1394\TaavoniUT3SMSManager\bin\Debug\TaavoniUT3SMSManager.exe
+D:\Projects\Taavoni\1394\TaavoniUT3SMSManager\bin\Debug\TaavoniUT3SMSManager.pdb
+D:\Projects\Taavoni\1394\TaavoniUT3SMSManager\obj\x86\Debug\TaavoniUT3SMSManager.exe
+D:\Projects\Taavoni\1394\TaavoniUT3SMSManager\obj\x86\Debug\TaavoniUT3SMSManager.pdb
+D:\Projects\Taavoni\1394\TaavoniUT3SMSManager\obj\x86\Debug\TaavoniUT3SMSManager.csprojResolveAssemblyReference.cache
