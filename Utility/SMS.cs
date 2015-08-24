@@ -70,7 +70,7 @@ namespace TaavoniUT3SMSManager.Utility
             try
             {
                 FarapayamakRecvService.ReceiveSoapClient rcvSoap = new FarapayamakRecvService.ReceiveSoapClient();
-                var results = rcvSoap.GetMessages(userName, password, 1, from, 0, 10);
+                var results = rcvSoap.GetMessagesWithChangeIsRead(userName, password, 1, from, 0, 10, false, true);
                 return results;
             }
             catch (Exception ex)

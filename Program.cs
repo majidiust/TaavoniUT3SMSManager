@@ -120,6 +120,7 @@ namespace TaavoniUT3SMSManager
                             Console.WriteLine("From : " + msg.Sender);
                             Console.WriteLine("Msg : " + msg.Body);
                             Console.WriteLine("Date : " + msg.SendDate);
+                           
                             if (m_model.MemberContacts.Count(P => P.MobilePhone.Contains(msg.Sender)) > 0)
                             {
                                 if (msg.Body.Contains("1"))
